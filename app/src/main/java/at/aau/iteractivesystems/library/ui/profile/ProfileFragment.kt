@@ -1,4 +1,4 @@
-package at.aau.iteractivesystems.library.ui.main
+package at.aau.iteractivesystems.library.ui.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,14 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import at.aau.iteractivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.ViewModelFactory
-import at.aau.iteractivesystems.library.databinding.FragmentMainBinding
+import at.aau.iteractivesystems.library.databinding.FragmentProfileBinding
 
-class MainFragment : Fragment() {
+class ProfileFragment : Fragment() {
 
-    private var binding: FragmentMainBinding? = null
+    private var binding: FragmentProfileBinding? = null
 
     private val viewModel by lazy {
-        ViewModelProvider(this, ViewModelFactory(EnvironmentImpl))[MainViewModel::class.java]
+        ViewModelProvider(this, ViewModelFactory(EnvironmentImpl))[ProfileViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -23,7 +23,7 @@ class MainFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentMainBinding.inflate(inflater, container, false)
+        val binding = FragmentProfileBinding.inflate(inflater, container, false)
         this.binding = binding
 
         return binding.root
@@ -39,7 +39,7 @@ class MainFragment : Fragment() {
         binding = null
     }
 
-    private fun setupUi(binding: FragmentMainBinding) {
+    private fun setupUi(binding: FragmentProfileBinding) {
         // TODO
     }
 }
