@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import at.aau.iteractivesystems.library.persistance.user.UserRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class StartupViewModel(
@@ -28,10 +26,7 @@ class StartupViewModel(
         get() = _state
 
     init {
-        viewModelScope.launch(Dispatchers.IO) {
-            // fake some loading operation, we are on some IO thread so we don't block main thread here.
-            delay(500L)
-
+        viewModelScope.launch {
             val currentUser = userRepository.getUser()
 
             // Check if we are logged in and update state accordingly

@@ -1,6 +1,9 @@
 package at.aau.iteractivesystems.library.persistance.user
 
 import at.aau.iteractivesystems.library.model.User
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 
 class UserRepositoryImpl : UserRepository {
 
@@ -14,11 +17,13 @@ class UserRepositoryImpl : UserRepository {
      */
     private var user: User? = null
 
-    override fun getUser(): User? {
-        return user
+    override suspend fun getUser(): User? = withContext(Dispatchers.IO) {
+        delay(500L) // fake loading takes some time off main thread
+
+        user
     }
 
-    override fun setUser(user: User?) {
+    override suspend fun setUser(user: User?) {
         this.user = user
     }
 }
