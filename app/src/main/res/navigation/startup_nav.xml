@@ -12,7 +12,9 @@
 
         <action
             android:id="@+id/startupToLogin"
-            app:destination="@id/login" />
+            app:destination="@id/login"
+            app:popUpTo="@id/startup"
+            app:popUpToInclusive="true" />
 
         <action
             android:id="@+id/startupToMain"
@@ -27,7 +29,9 @@
 
         <action
             android:id="@+id/loginToMain"
-            app:destination="@id/main" />
+            app:destination="@id/main"
+            app:popUpTo="@id/startup"
+            app:popUpToInclusive="true" />
 
     </fragment>
 
