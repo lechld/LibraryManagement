@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Book Keeper</string>
+    <string name="discover_fragment_title">Discover</string>
+    <string name="borrowed_books_fragment_title">Borrowed Books</string>
 </resources>

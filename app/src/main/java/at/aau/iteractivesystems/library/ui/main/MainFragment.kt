@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import at.aau.iteractivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.ViewModelFactory
 import at.aau.iteractivesystems.library.databinding.FragmentMainBinding
@@ -53,7 +52,7 @@ class MainFragment : Fragment() {
             pager.adapter = pageAdapter
             tabLayoutMediator = TabLayoutMediator(tabLayout, pager) { tab, position ->
                 println("${MainFragment::class.simpleName} - Selected $tab at position $position")
-                // TODO: Can be used to update title toolbar
+                tab.setText(pageAdapter.getTitleRes(position))
             }
             tabLayoutMediator?.attach()
         }
