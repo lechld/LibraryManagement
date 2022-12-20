@@ -35,8 +35,8 @@ class LoginFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         binding = null
+        super.onDestroyView()
     }
 
     private fun setupUi(binding: FragmentLoginBinding) {

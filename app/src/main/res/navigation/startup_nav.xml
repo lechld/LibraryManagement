@@ -18,7 +18,9 @@
 
         <action
             android:id="@+id/startupToMain"
-            app:destination="@id/main" />
+            app:destination="@id/main"
+            app:popUpTo="@id/startup"
+            app:popUpToInclusive="true" />
 
     </fragment>
 

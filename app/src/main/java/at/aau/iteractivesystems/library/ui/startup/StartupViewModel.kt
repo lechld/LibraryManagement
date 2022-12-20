@@ -29,6 +29,11 @@ class StartupViewModel(
         viewModelScope.launch {
             val currentUser = userRepository.getUser()
 
+            _state.postValue(State.LoggedIn)
+            return@launch
+
+            // TODO: Enable following code, I started with main first.
+
             // Check if we are logged in and update state accordingly
             if (currentUser == null) {
                 // be aware, postValue ensures that value is posted on main thread, we don't need to think about that more.
