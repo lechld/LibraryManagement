@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import at.aau.iteractivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.ViewModelFactory
 import at.aau.iteractivesystems.library.databinding.FragmentDiscoverBinding
+import at.aau.iteractivesystems.library.ui.main.discover.adapter.DiscoverAdapter
 
 class DiscoverFragment : Fragment() {
 
@@ -16,6 +17,10 @@ class DiscoverFragment : Fragment() {
 
     private val viewModel by lazy {
         ViewModelProvider(this, ViewModelFactory(EnvironmentImpl))[DiscoverViewModel::class.java]
+    }
+
+    private val adapter by lazy {
+        DiscoverAdapter()
     }
 
     override fun onCreateView(
@@ -35,11 +40,26 @@ class DiscoverFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        binding?.recycler?.adapter = null
         binding = null
         super.onDestroyView()
     }
 
     private fun setupUi(binding: FragmentDiscoverBinding) {
-        // TODO
+        binding.recycler.adapter = adapter
+
+        viewModel.state.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is DiscoverViewModel.State.Content -> {
+                    adapter.submitList(state.items)
+                }
+                is DiscoverViewModel.State.Error -> {
+                    // TODO
+                }
+                DiscoverViewModel.State.Loading -> {
+                    // TODO
+                }
+            }
+        }
     }
 }

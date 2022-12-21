@@ -2,4 +2,5 @@
     <string name="app_name">Book Keeper</string>
     <string name="discover_fragment_title">Discover</string>
     <string name="borrowed_books_fragment_title">Borrowed Books</string>
+    <string name="discover_content_header">Check out the latest most trending books.</string>
 </resources>

@@ -17,12 +17,15 @@ class ViewModelFactory(
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(StartupViewModel::class.java) -> (StartupViewModel(
-                environment.userRepository
+                userRepository = environment.userRepository
             )) as T
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> (LoginViewModel()) as T
             modelClass.isAssignableFrom(MainViewModel::class.java) -> (MainViewModel()) as T
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> (ProfileViewModel()) as T
-            modelClass.isAssignableFrom(DiscoverViewModel::class.java) -> (DiscoverViewModel()) as T
+            modelClass.isAssignableFrom(DiscoverViewModel::class.java) -> (DiscoverViewModel(
+                recommendationRepository = environment.recommendationRepository,
+                booksRepository = environment.booksRepository
+            )) as T
             modelClass.isAssignableFrom(BorrowedBooksViewModel::class.java) -> (BorrowedBooksViewModel()) as T
             else -> throw IllegalArgumentException("Unknown ViewModel class. Maybe forgot to register it in ViewModelFactory?")
         }

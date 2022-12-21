@@ -1,5 +1,7 @@
 package at.aau.iteractivesystems.library
 
+import at.aau.iteractivesystems.library.persistance.books.BooksRepository
+import at.aau.iteractivesystems.library.persistance.books.RecommendationRepository
 import at.aau.iteractivesystems.library.persistance.user.UserRepository
 
 /**
@@ -7,4 +9,6 @@ import at.aau.iteractivesystems.library.persistance.user.UserRepository
  */
 interface Environment {
     val userRepository: UserRepository
+    val booksRepository: BooksRepository
+    val recommendationRepository: RecommendationRepository
 }

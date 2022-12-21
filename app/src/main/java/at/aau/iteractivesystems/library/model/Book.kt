@@ -5,5 +5,6 @@ import java.time.LocalDate
 data class Book(
     val isbn: String,
     val title: String,
+    val image: String,
     val publicationDate: LocalDate
 )

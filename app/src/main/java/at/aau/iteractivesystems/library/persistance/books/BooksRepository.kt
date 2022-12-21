@@ -1,6 +1,7 @@
 package at.aau.iteractivesystems.library.persistance.books
 
-interface BooksRepository {
+import at.aau.iteractivesystems.library.model.Book
 
-    // TODO: Not sure yet what to define
+interface BooksRepository {
+    suspend fun getBook(id: String): Book?
 }
