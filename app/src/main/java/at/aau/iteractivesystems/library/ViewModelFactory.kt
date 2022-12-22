@@ -6,6 +6,7 @@ import at.aau.iteractivesystems.library.ui.login.LoginViewModel
 import at.aau.iteractivesystems.library.ui.main.MainViewModel
 import at.aau.iteractivesystems.library.ui.main.borrowed.BorrowedBooksViewModel
 import at.aau.iteractivesystems.library.ui.main.discover.DiscoverViewModel
+import at.aau.iteractivesystems.library.ui.main.reserved.ReservedViewModel
 import at.aau.iteractivesystems.library.ui.profile.ProfileViewModel
 import at.aau.iteractivesystems.library.ui.startup.StartupViewModel
 
@@ -27,6 +28,7 @@ class ViewModelFactory(
                 booksRepository = environment.booksRepository
             )) as T
             modelClass.isAssignableFrom(BorrowedBooksViewModel::class.java) -> (BorrowedBooksViewModel()) as T
+            modelClass.isAssignableFrom(ReservedViewModel::class.java) -> (ReservedViewModel()) as T
             else -> throw IllegalArgumentException("Unknown ViewModel class. Maybe forgot to register it in ViewModelFactory?")
         }
     }
