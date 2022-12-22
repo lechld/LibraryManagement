@@ -2,6 +2,7 @@ package at.aau.iteractivesystems.library
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import at.aau.iteractivesystems.library.ui.bookdetail.DetailViewModel
 import at.aau.iteractivesystems.library.ui.login.LoginViewModel
 import at.aau.iteractivesystems.library.ui.main.MainViewModel
 import at.aau.iteractivesystems.library.ui.main.borrowed.BorrowedBooksViewModel
@@ -29,6 +30,7 @@ class ViewModelFactory(
             )) as T
             modelClass.isAssignableFrom(BorrowedBooksViewModel::class.java) -> (BorrowedBooksViewModel()) as T
             modelClass.isAssignableFrom(ReservedViewModel::class.java) -> (ReservedViewModel()) as T
+            modelClass.isAssignableFrom(DetailViewModel::class.java) -> (DetailViewModel()) as T
             else -> throw IllegalArgumentException("Unknown ViewModel class. Maybe forgot to register it in ViewModelFactory?")
         }
     }
