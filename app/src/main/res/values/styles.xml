@@ -12,4 +12,9 @@
         <item name="queryHint">@string/search_hint</item>
     </style>
 
+    <style name="AppTheme.Dialog.Fullscreen" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
 </resources>
