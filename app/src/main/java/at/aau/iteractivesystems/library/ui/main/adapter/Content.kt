@@ -4,10 +4,6 @@ import at.aau.iteractivesystems.library.ui.utils.AndroidString
 
 sealed class Content {
 
-    data class Search(
-        val text: String,
-    ) : Content()
-
     data class Headline(
         val text: AndroidString,
     ) : Content()

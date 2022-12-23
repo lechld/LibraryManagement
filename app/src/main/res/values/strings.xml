@@ -4,6 +4,7 @@
     <string name="borrowed">Borrowed</string>
     <string name="reserved">Reserved</string>
     <string name="profile">Profile</string>
+    <string name="search_hint">Search for any book you like 📖</string>
     <string name="borrowed_books_fragment_title">Borrowed Books</string>
     <string name="discover_content_header">Check out the latest most trending books.</string>
 </resources>

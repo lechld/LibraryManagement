@@ -7,23 +7,19 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import at.aau.iteractivesystems.library.databinding.ItemHeadlineBinding
 import at.aau.iteractivesystems.library.databinding.ItemHeadlineSmallBinding
-import at.aau.iteractivesystems.library.databinding.ItemSearchBinding
 import at.aau.iteractivesystems.library.databinding.ItemSectionBinding
-import at.aau.iteractivesystems.library.ui.main.adapter.viewholder.HeadlineViewHolder
-import at.aau.iteractivesystems.library.ui.main.adapter.viewholder.SearchViewHolder
-import at.aau.iteractivesystems.library.ui.main.adapter.viewholder.SectionViewHolder
 import at.aau.iteractivesystems.library.ui.main.adapter.viewholder.HeadlineSmallViewHolder
+import at.aau.iteractivesystems.library.ui.main.adapter.viewholder.HeadlineViewHolder
+import at.aau.iteractivesystems.library.ui.main.adapter.viewholder.SectionViewHolder
 
-private const val SEARCH_VIEW_TYPE = 0
-private const val HEADLINE_VIEW_TYPE = 1
-private const val HEADLINE_SMALL_VIEW_TYPE = 2
-private const val SECTION_VIEW_TYPE = 3
+private const val HEADLINE_VIEW_TYPE = 0
+private const val HEADLINE_SMALL_VIEW_TYPE = 1
+private const val SECTION_VIEW_TYPE = 2
 
 class ContentAdapter : ListAdapter<Content, RecyclerView.ViewHolder>(ContentDiffUtil()) {
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
-            is Content.Search -> SEARCH_VIEW_TYPE
             is Content.Headline -> HEADLINE_VIEW_TYPE
             is Content.HeadlineSmall -> HEADLINE_SMALL_VIEW_TYPE
             is Content.Section -> SECTION_VIEW_TYPE
@@ -35,11 +31,6 @@ class ContentAdapter : ListAdapter<Content, RecyclerView.ViewHolder>(ContentDiff
         val inflater = LayoutInflater.from(parent.context)
 
         return when (viewType) {
-            SEARCH_VIEW_TYPE -> {
-                val binding = ItemSearchBinding.inflate(inflater, parent, false)
-
-                SearchViewHolder(binding)
-            }
             HEADLINE_VIEW_TYPE -> {
                 val binding = ItemHeadlineBinding.inflate(inflater, parent, false)
 
@@ -63,9 +54,6 @@ class ContentAdapter : ListAdapter<Content, RecyclerView.ViewHolder>(ContentDiff
         val item = getItem(position)
 
         when (holder) {
-            is SearchViewHolder -> {
-                holder.bind(item as Content.Search)
-            }
             is HeadlineViewHolder -> {
                 holder.bind(item as Content.Headline)
             }
@@ -84,9 +72,6 @@ class ContentAdapter : ListAdapter<Content, RecyclerView.ViewHolder>(ContentDiff
         override fun areItemsTheSame(oldItem: Content, newItem: Content): Boolean {
             if (oldItem == newItem) return true
 
-            if (oldItem is Content.Search && newItem is Content.Search) {
-                return true
-            }
             if (oldItem is Content.Headline && newItem is Content.Headline) {
                 return oldItem.text == newItem.text
             }

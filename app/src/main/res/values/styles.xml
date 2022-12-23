@@ -5,4 +5,11 @@
         <item name="cornerSize">12dp</item>
     </style>
 
+    <style name="AppTheme.SearchView" parent="AppTheme">
+        <item name="android:background">@drawable/background_search_view</item>
+        <item name="iconifiedByDefault">false</item>
+        <item name="queryBackground">@android:color/transparent</item>
+        <item name="queryHint">@string/search_hint</item>
+    </style>
+
 </resources>

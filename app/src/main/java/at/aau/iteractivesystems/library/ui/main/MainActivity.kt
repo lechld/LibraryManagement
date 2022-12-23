@@ -9,7 +9,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import at.aau.iteractivesystems.library.R
-import at.aau.iteractivesystems.library.databinding.ActivityStartupBinding
+import at.aau.iteractivesystems.library.databinding.ActivityMainBinding
 
 /**
  * That's the main and startup activity.
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = ActivityStartupBinding.inflate(layoutInflater)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val navHost = supportFragmentManager.findFragmentById(R.id.nav_container) as NavHostFragment

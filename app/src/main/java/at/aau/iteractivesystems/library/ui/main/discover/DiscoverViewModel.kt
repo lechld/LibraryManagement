@@ -36,7 +36,6 @@ class DiscoverViewModel(
             val recommendations = recommendationRepository.getRecommendations()
             val content = mutableListOf<Content>()
 
-            content.add(Content.Search(""))
             content.add(Content.Headline(AndroidString.Resource(R.string.discover_content_header)))
 
             recommendations.forEach { recommendation ->
