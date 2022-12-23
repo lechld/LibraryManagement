@@ -9,20 +9,20 @@ data class Document(
     val coverId: String? = null,
 
     @SerialName("edition_count")
-    val editionCount: Int,
+    val editionCount: Int = 0,
 
     @SerialName("title")
-    val title: String,
+    val title: String = "",
 
     @SerialName("author_name")
-    val authorName: List<String>,
+    val authorName: List<String> = emptyList(),
 
     @SerialName("first_publish_year")
-    val firstPublishYear: String,
+    val firstPublishYear: String = "",
 
     @SerialName("key")
-    val key: String,
+    val key: String = "",
 
     @SerialName("author_key")
-    val authorKey: List<String>
+    val authorKey: List<String> = emptyList()
 )

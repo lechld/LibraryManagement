@@ -8,6 +8,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 private const val ENDPOINT = OPEN_LIB_ENDPOINT + "search.json"
+private const val SEARCH_LIMIT = 100
+private const val SUBJECT_LIMIT = 20
 
 class SearchApiImpl(private val client: HttpClient) : SearchApi {
 
@@ -16,7 +18,16 @@ class SearchApiImpl(private val client: HttpClient) : SearchApi {
     ): SearchResult = withContext(Dispatchers.IO) {
         client.get(ENDPOINT) {
             parameter("title", title)
-            parameter("limit", 100)
+            parameter("limit", SEARCH_LIMIT)
+        }
+    }
+
+    override suspend fun searchBySubject(
+        subject: String
+    ): SearchResult = withContext(Dispatchers.IO) {
+        client.get(ENDPOINT) {
+            parameter("subject", subject)
+            parameter("limit", SUBJECT_LIMIT)
         }
     }
 }

@@ -24,7 +24,7 @@ object EnvironmentImpl : Environment {
     }
 
     override val recommendationRepository: RecommendationRepository by lazy {
-        RecommendationRepositoryImpl()
+        RecommendationRepositoryImpl(searchApi)
     }
 
     override val recentlyVisitedRepository: RecentlyVisitedRepository by lazy {

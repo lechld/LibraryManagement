@@ -52,14 +52,16 @@ class DiscoverViewModel(
             content.add(Content.Headline(AndroidString.Resource(R.string.discover_content_header)))
 
             recommendations.forEach { recommendation ->
-                val items = recommendation.bookIds.mapNotNull { bookId ->
-                    val book = booksRepository.getBook(bookId) ?: return@mapNotNull null
-
-                    Content.Section.Item(book.isbn, book.image, book.title)
+                val items = recommendation.items.mapNotNull { recommendationItem ->
+                    Content.Section.Item(
+                        id = recommendationItem.title,
+                        image = recommendationItem.coverId,
+                        title = recommendationItem.title
+                    )
                 }
 
                 if (items.isNotEmpty()) {
-                    content.add(Content.HeadlineSmall(AndroidString.Text(recommendation.title)))
+                    content.add(Content.HeadlineSmall(AndroidString.Resource(recommendation.titleRes)))
                     content.add(Content.Section.Big(recommendation.id, items))
                 }
             }
