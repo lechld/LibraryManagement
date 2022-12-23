@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
+    android:paddingVertical="@dimen/smallSpacing"
     android:paddingStart="0dp"
     android:paddingEnd="@dimen/defaultSpacing">
 
@@ -18,15 +19,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/AppTheme.ImageRoundedCorners"
-        tools:src="@android:drawable/screen_background_dark" />
+        tools:background="@color/material_dynamic_primary80" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+        android:layout_marginTop="@dimen/smallSpacing"
+        android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/image"
-        tools:text="Book Title" />
+        tools:text="Title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

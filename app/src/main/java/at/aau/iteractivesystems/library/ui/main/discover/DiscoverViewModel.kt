@@ -7,7 +7,8 @@ import androidx.lifecycle.viewModelScope
 import at.aau.iteractivesystems.library.R
 import at.aau.iteractivesystems.library.persistance.books.BooksRepository
 import at.aau.iteractivesystems.library.persistance.books.RecommendationRepository
-import at.aau.iteractivesystems.library.ui.main.discover.adapter.DiscoverElement
+import at.aau.iteractivesystems.library.ui.main.adapter.Content
+import at.aau.iteractivesystems.library.ui.utils.AndroidString
 import kotlinx.coroutines.launch
 
 class DiscoverViewModel(
@@ -18,7 +19,7 @@ class DiscoverViewModel(
     sealed class State {
         object Loading : State()
         data class Error(val error: Exception) : State()
-        data class Content(val items: List<DiscoverElement>) : State()
+        data class Loaded(val items: List<Content>) : State()
     }
 
     private val _state: MutableLiveData<State> = MutableLiveData(State.Loading)
@@ -33,24 +34,25 @@ class DiscoverViewModel(
     private fun reload() {
         viewModelScope.launch {
             val recommendations = recommendationRepository.getRecommendations()
+            val content = mutableListOf<Content>()
 
-            val title = DiscoverElement.Text(R.string.discover_content_header)
+            content.add(Content.Search(""))
+            content.add(Content.Headline(AndroidString.Resource(R.string.discover_content_header)))
 
-            val sections = recommendations.map { recommendation ->
-                val sectionItems = recommendation.bookIds.mapNotNull { bookId ->
+            recommendations.forEach { recommendation ->
+                val items = recommendation.bookIds.mapNotNull { bookId ->
                     val book = booksRepository.getBook(bookId) ?: return@mapNotNull null
 
-                    DiscoverElement.Section.Item(bookId, book.image, book.title)
+                    Content.Section.Item(bookId, book.image, book.title)
                 }
 
-                DiscoverElement.Section(recommendation.id, recommendation.title, sectionItems)
+                if (items.isNotEmpty()) {
+                    content.add(Content.HeadlineSmall(AndroidString.Text(recommendation.title)))
+                    content.add(Content.Section.Big(recommendation.id, items))
+                }
             }
 
-            val discoverContent = mutableListOf<DiscoverElement>(title)
-
-            discoverContent.addAll(sections)
-
-            _state.postValue(State.Content(discoverContent))
+            _state.postValue(State.Loaded(content))
         }
     }
 }

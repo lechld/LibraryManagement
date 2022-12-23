@@ -1,16 +1,16 @@
-package at.aau.iteractivesystems.library.ui.main.discover.adapter
+package at.aau.iteractivesystems.library.ui.main.adapter.viewholder.section
 
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import at.aau.iteractivesystems.library.R
-import at.aau.iteractivesystems.library.databinding.ItemDiscoverSectionItemBinding
+import at.aau.iteractivesystems.library.databinding.ItemSectionBigBinding
+import at.aau.iteractivesystems.library.ui.main.adapter.Content
 
-class DiscoverSectionItemViewHolder(
-    private val binding: ItemDiscoverSectionItemBinding
+class BigViewHolder(
+    private val binding: ItemSectionBigBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: DiscoverElement.Section.Item) {
-        // TODO: Load real images with picasso or glide
+    fun bind(item: Content.Section.Item) {
         binding.image.background = AppCompatResources.getDrawable(
             binding.root.context, R.color.md_theme_dark_primary
         )
