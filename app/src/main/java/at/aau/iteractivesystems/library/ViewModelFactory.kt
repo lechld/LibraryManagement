@@ -28,7 +28,9 @@ class ViewModelFactory(
             modelClass.isAssignableFrom(BorrowedBooksViewModel::class.java) -> (BorrowedBooksViewModel()) as T
             modelClass.isAssignableFrom(ReservedViewModel::class.java) -> (ReservedViewModel()) as T
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> (DetailViewModel()) as T
-            modelClass.isAssignableFrom(SearchDialogViewModel::class.java) -> (SearchDialogViewModel()) as T
+            modelClass.isAssignableFrom(SearchDialogViewModel::class.java) -> (SearchDialogViewModel(
+                searchApi = environment.searchApi,
+            )) as T
             modelClass.isAssignableFrom(SearchTextViewModel::class.java) -> (SearchTextViewModel()) as T
             else -> throw IllegalArgumentException("Unknown ViewModel class. Maybe forgot to register it in ViewModelFactory?")
         }

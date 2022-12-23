@@ -3,8 +3,13 @@ package at.aau.iteractivesystems.library.ui.main.search
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import at.aau.iteractivesystems.library.api.search.SearchApi
+import kotlinx.coroutines.launch
 
-class SearchDialogViewModel : ViewModel() {
+class SearchDialogViewModel(
+    private val searchApi: SearchApi,
+) : ViewModel() {
 
     sealed class State {
         object Loading : State()
@@ -21,13 +26,29 @@ class SearchDialogViewModel : ViewModel() {
     private var query: String? = null
 
     fun submitQuery(query: String?) {
-        if (this.query == query) {
-            // Query has not been changed, ignore it
+        if (this.query == query) return
+
+        if (query.isNullOrEmpty()) {
+            this.query = query
+            // TODO: Cleanup result list
             return
         }
 
-        // TODO: Perform search
+        _state.postValue(State.Loading)
 
-        this.query = query
+        viewModelScope.launch {
+            try {
+                val searchResult = searchApi.searchByTitle(query)
+
+                print(searchResult.docs)
+
+                _state.postValue(State.Loaded("dummy"))
+
+            } catch (error: Exception) {
+                _state.postValue(State.Error(error))
+            }
+
+            this@SearchDialogViewModel.query = query
+        }
     }
 }

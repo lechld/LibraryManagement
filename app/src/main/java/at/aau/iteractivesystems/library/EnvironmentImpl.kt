@@ -1,5 +1,8 @@
 package at.aau.iteractivesystems.library
 
+import at.aau.iteractivesystems.library.api.ktorHttpClient
+import at.aau.iteractivesystems.library.api.search.SearchApi
+import at.aau.iteractivesystems.library.api.search.SearchApiImpl
 import at.aau.iteractivesystems.library.persistance.books.*
 import at.aau.iteractivesystems.library.persistance.user.UserRepository
 import at.aau.iteractivesystems.library.persistance.user.UserRepositoryImpl
@@ -27,4 +30,12 @@ object EnvironmentImpl : Environment {
     override val recentlyVisitedRepository: RecentlyVisitedRepository by lazy {
         RecentlyVisitedRepositoryImpl()
     }
+
+    // region API
+
+    override val searchApi: SearchApi by lazy {
+        SearchApiImpl(ktorHttpClient)
+    }
+
+    // endregion
 }

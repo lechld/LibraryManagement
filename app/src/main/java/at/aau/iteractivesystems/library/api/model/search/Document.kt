@@ -1,0 +1,28 @@
+package at.aau.iteractivesystems.library.api.model.search
+
+import kotlinx.serialization.SerialName
+
+@kotlinx.serialization.Serializable
+data class Document(
+
+    @SerialName("cover_i")
+    val coverId: String? = null,
+
+    @SerialName("edition_count")
+    val editionCount: Int,
+
+    @SerialName("title")
+    val title: String,
+
+    @SerialName("author_name")
+    val authorName: List<String>,
+
+    @SerialName("first_publish_year")
+    val firstPublishYear: String,
+
+    @SerialName("key")
+    val key: String,
+
+    @SerialName("author_key")
+    val authorKey: List<String>
+)

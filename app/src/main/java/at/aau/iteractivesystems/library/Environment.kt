@@ -1,5 +1,6 @@
 package at.aau.iteractivesystems.library
 
+import at.aau.iteractivesystems.library.api.search.SearchApi
 import at.aau.iteractivesystems.library.persistance.books.BooksRepository
 import at.aau.iteractivesystems.library.persistance.books.RecentlyVisitedRepository
 import at.aau.iteractivesystems.library.persistance.books.RecommendationRepository
@@ -13,4 +14,7 @@ interface Environment {
     val booksRepository: BooksRepository
     val recommendationRepository: RecommendationRepository
     val recentlyVisitedRepository: RecentlyVisitedRepository
+
+    // API
+    val searchApi: SearchApi
 }
