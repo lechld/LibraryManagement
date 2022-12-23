@@ -15,4 +15,5 @@
     <string name="search_hint">Search for any book you like 📖</string>
     <string name="borrowed_books_fragment_title">Borrowed Books</string>
     <string name="discover_content_header">Check out the latest most trending books.</string>
+    <string name="open_library_hint">All data you see is received by <a href="http://openlibrary.com/">OpenLibary.org</a> 📖 Check them out!</string>
 </resources>

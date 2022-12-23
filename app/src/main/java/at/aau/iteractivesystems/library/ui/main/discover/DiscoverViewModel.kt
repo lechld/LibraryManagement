@@ -66,6 +66,8 @@ class DiscoverViewModel(
                 }
             }
 
+            content.add(Content.HeadlineSmall(AndroidString.Resource(R.string.open_library_hint)))
+
             _state.postValue(State.Loaded(content))
         }
     }

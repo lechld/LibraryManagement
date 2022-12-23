@@ -4,6 +4,7 @@
     android:id="@+id/text_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:autoLink="web"
     android:paddingHorizontal="@dimen/defaultSpacing"
     android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
     tools:text="Text" />
