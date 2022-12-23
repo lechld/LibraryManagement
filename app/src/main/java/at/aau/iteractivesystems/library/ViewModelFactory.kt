@@ -22,7 +22,8 @@ class ViewModelFactory(
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> (ProfileViewModel()) as T
             modelClass.isAssignableFrom(DiscoverViewModel::class.java) -> (DiscoverViewModel(
                 recommendationRepository = environment.recommendationRepository,
-                booksRepository = environment.booksRepository
+                booksRepository = environment.booksRepository,
+                recentlyVisitedRepository = environment.recentlyVisitedRepository,
             )) as T
             modelClass.isAssignableFrom(BorrowedBooksViewModel::class.java) -> (BorrowedBooksViewModel()) as T
             modelClass.isAssignableFrom(ReservedViewModel::class.java) -> (ReservedViewModel()) as T

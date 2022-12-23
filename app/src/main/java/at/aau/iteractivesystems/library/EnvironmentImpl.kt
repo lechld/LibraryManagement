@@ -1,9 +1,6 @@
 package at.aau.iteractivesystems.library
 
-import at.aau.iteractivesystems.library.persistance.books.BooksRepository
-import at.aau.iteractivesystems.library.persistance.books.BooksRepositoryImpl
-import at.aau.iteractivesystems.library.persistance.books.RecommendationRepository
-import at.aau.iteractivesystems.library.persistance.books.RecommendationRepositoryImpl
+import at.aau.iteractivesystems.library.persistance.books.*
 import at.aau.iteractivesystems.library.persistance.user.UserRepository
 import at.aau.iteractivesystems.library.persistance.user.UserRepositoryImpl
 
@@ -25,5 +22,9 @@ object EnvironmentImpl : Environment {
 
     override val recommendationRepository: RecommendationRepository by lazy {
         RecommendationRepositoryImpl()
+    }
+
+    override val recentlyVisitedRepository: RecentlyVisitedRepository by lazy {
+        RecentlyVisitedRepositoryImpl()
     }
 }
