@@ -3,9 +3,9 @@ package at.aau.iteractivesystems.library
 import at.aau.iteractivesystems.library.api.ktorHttpClient
 import at.aau.iteractivesystems.library.api.search.SearchApi
 import at.aau.iteractivesystems.library.api.search.SearchApiImpl
-import at.aau.iteractivesystems.library.persistance.books.*
-import at.aau.iteractivesystems.library.persistance.user.UserRepository
-import at.aau.iteractivesystems.library.persistance.user.UserRepositoryImpl
+import at.aau.iteractivesystems.library.repository.books.*
+import at.aau.iteractivesystems.library.repository.user.UserRepository
+import at.aau.iteractivesystems.library.repository.user.UserRepositoryImpl
 
 /**
  * Singleton using us to allow concept of dependency injection.

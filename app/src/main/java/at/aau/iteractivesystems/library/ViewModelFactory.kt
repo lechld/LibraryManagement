@@ -2,13 +2,12 @@ package at.aau.iteractivesystems.library
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import at.aau.iteractivesystems.library.ui.bookdetail.DetailViewModel
 import at.aau.iteractivesystems.library.ui.login.LoginViewModel
 import at.aau.iteractivesystems.library.ui.main.explore.ExploreViewModel
 import at.aau.iteractivesystems.library.ui.main.home.HomeViewModel
+import at.aau.iteractivesystems.library.ui.main.profile.ProfileViewModel
 import at.aau.iteractivesystems.library.ui.main.search.SearchDialogViewModel
 import at.aau.iteractivesystems.library.ui.main.search.SearchTextViewModel
-import at.aau.iteractivesystems.library.ui.main.profile.ProfileViewModel
 
 class ViewModelFactory(
     private val environment: Environment
@@ -24,10 +23,10 @@ class ViewModelFactory(
                 booksRepository = environment.booksRepository,
                 recentlyVisitedRepository = environment.recentlyVisitedRepository,
             )) as T
-            modelClass.isAssignableFrom(BorrowedBooksViewModel::class.java) -> (BorrowedBooksViewModel()) as T
-            modelClass.isAssignableFrom(ReservedViewModel::class.java) -> (ReservedViewModel()) as T
-            modelClass.isAssignableFrom(DetailViewModel::class.java) -> (DetailViewModel()) as T
-            modelClass.isAssignableFrom(SearchDialogViewModel::class.java) -> (SearchDialogViewModel()) as T
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> (HomeViewModel()) as T
+            modelClass.isAssignableFrom(SearchDialogViewModel::class.java) -> (SearchDialogViewModel(
+                searchApi = environment.searchApi,
+            )) as T
             modelClass.isAssignableFrom(SearchTextViewModel::class.java) -> (SearchTextViewModel()) as T
             else -> throw IllegalArgumentException("Unknown ViewModel class. Maybe forgot to register it in ViewModelFactory?")
         }
