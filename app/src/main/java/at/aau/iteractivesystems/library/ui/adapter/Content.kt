@@ -1,4 +1,4 @@
-package at.aau.iteractivesystems.library.ui.main.adapter
+package at.aau.iteractivesystems.library.ui.adapter
 
 import at.aau.iteractivesystems.library.ui.utils.AndroidString
 

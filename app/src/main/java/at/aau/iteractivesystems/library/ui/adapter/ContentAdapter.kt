@@ -1,4 +1,4 @@
-package at.aau.iteractivesystems.library.ui.main.adapter
+package at.aau.iteractivesystems.library.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import at.aau.iteractivesystems.library.databinding.ItemHeadlineBinding
 import at.aau.iteractivesystems.library.databinding.ItemHeadlineSmallBinding
 import at.aau.iteractivesystems.library.databinding.ItemSectionBinding
-import at.aau.iteractivesystems.library.ui.main.adapter.viewholder.HeadlineSmallViewHolder
-import at.aau.iteractivesystems.library.ui.main.adapter.viewholder.HeadlineViewHolder
-import at.aau.iteractivesystems.library.ui.main.adapter.viewholder.SectionViewHolder
+import at.aau.iteractivesystems.library.ui.adapter.viewholder.HeadlineSmallViewHolder
+import at.aau.iteractivesystems.library.ui.adapter.viewholder.HeadlineViewHolder
+import at.aau.iteractivesystems.library.ui.adapter.viewholder.SectionViewHolder
 
 private const val HEADLINE_VIEW_TYPE = 0
 private const val HEADLINE_SMALL_VIEW_TYPE = 1

@@ -1,4 +1,4 @@
-package at.aau.iteractivesystems.library.persistance.user
+package at.aau.iteractivesystems.library.repository.user
 
 import at.aau.iteractivesystems.library.model.User
 

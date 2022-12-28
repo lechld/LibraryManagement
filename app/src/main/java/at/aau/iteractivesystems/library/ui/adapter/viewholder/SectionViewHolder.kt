@@ -1,10 +1,10 @@
-package at.aau.iteractivesystems.library.ui.main.adapter.viewholder
+package at.aau.iteractivesystems.library.ui.adapter.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import at.aau.iteractivesystems.library.databinding.ItemSectionBinding
-import at.aau.iteractivesystems.library.ui.main.adapter.Content
-import at.aau.iteractivesystems.library.ui.main.adapter.viewholder.section.BigSectionAdapter
-import at.aau.iteractivesystems.library.ui.main.adapter.viewholder.section.SmallSectionAdapter
+import at.aau.iteractivesystems.library.ui.adapter.Content
+import at.aau.iteractivesystems.library.ui.adapter.viewholder.section.BigSectionAdapter
+import at.aau.iteractivesystems.library.ui.adapter.viewholder.section.SmallSectionAdapter
 
 class SectionViewHolder(
     private val binding: ItemSectionBinding
