@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">Book Keeper</string>
-    <string name="discover">Discover</string>
-    <string name="borrowed">Borrowed</string>
-    <string name="reserved">Reserved</string>
+    <string name="explore">Explore</string>
+    <string name="home">Home</string>
     <string name="profile">Profile</string>
     <string name="subject_romance">Romance</string>
     <string name="subject_thriller">Thriller</string>

@@ -1,4 +1,4 @@
-package at.aau.iteractivesystems.library.ui.bookdetail
+package at.aau.iteractivesystems.library.ui.main.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,26 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.navArgs
 import at.aau.iteractivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.ViewModelFactory
-import at.aau.iteractivesystems.library.databinding.FragmentDetailBinding
+import at.aau.iteractivesystems.library.databinding.FragmentProfileBinding
 
-class DetailFragment : Fragment() {
+class ProfileFragment : Fragment() {
 
-    private var binding: FragmentDetailBinding? = null
-
-    private val navArgs by navArgs<DetailFragmentArgs>()
-
-    private val bookId by lazy {
-        navArgs.bookId
-    }
+    private var binding: FragmentProfileBinding? = null
 
     private val viewModel by lazy {
-        ViewModelProvider(
-            this,
-            DetailViewModel.Factory(bookId, EnvironmentImpl)
-        )[DetailViewModel::class.java]
+        ViewModelProvider(this, ViewModelFactory(EnvironmentImpl))[ProfileViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -33,7 +23,7 @@ class DetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentDetailBinding.inflate(inflater, container, false)
+        val binding = FragmentProfileBinding.inflate(inflater, container, false)
         this.binding = binding
 
         return binding.root
@@ -49,7 +39,7 @@ class DetailFragment : Fragment() {
         super.onDestroyView()
     }
 
-    private fun setupUi(binding: FragmentDetailBinding) {
+    private fun setupUi(binding: FragmentProfileBinding) {
         // TODO
     }
 }

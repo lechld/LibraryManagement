@@ -3,26 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/discover">
+    app:startDestination="@id/explore">
 
     <fragment
-        android:id="@+id/discover"
-        android:name="at.aau.iteractivesystems.library.ui.main.discover.DiscoverFragment"
-        tools:layout="@layout/fragment_discover" />
+        android:id="@+id/explore"
+        android:name="at.aau.iteractivesystems.library.ui.main.explore.ExploreFragment"
+        tools:layout="@layout/fragment_explore">
+
+        <action
+            android:id="@+id/action_explore_to_detail"
+            app:destination="@id/book_detail"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+
+    </fragment>
 
     <fragment
-        android:id="@+id/reserved"
-        android:name="at.aau.iteractivesystems.library.ui.main.reserved.ReservedFragment"
-        tools:layout="@layout/fragment_reserved" />
-
-    <fragment
-        android:id="@+id/borrowed"
-        android:name="at.aau.iteractivesystems.library.ui.main.borrowed.BorrowedBooksFragment"
-        tools:layout="@layout/fragment_borrowed_books" />
+        android:id="@+id/home"
+        android:name="at.aau.iteractivesystems.library.ui.main.home.HomeFragment"
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/profile"
-        android:name="at.aau.iteractivesystems.library.ui.profile.ProfileFragment"
+        android:name="at.aau.iteractivesystems.library.ui.main.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/book_detail"
+        android:name="at.aau.iteractivesystems.library.ui.bookdetail.DetailFragment"
+        tools:layout="@layout/fragment_detail">
+
+        <argument
+            android:name="bookId"
+            app:argType="string"
+            app:nullable="false" />
+
+    </fragment>
 
 </navigation>
