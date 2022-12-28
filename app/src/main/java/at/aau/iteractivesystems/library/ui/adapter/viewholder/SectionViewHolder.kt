@@ -7,11 +7,12 @@ import at.aau.iteractivesystems.library.ui.adapter.viewholder.section.BigSection
 import at.aau.iteractivesystems.library.ui.adapter.viewholder.section.SmallSectionAdapter
 
 class SectionViewHolder(
-    private val binding: ItemSectionBinding
+    private val binding: ItemSectionBinding,
+    onClick: (Content.Section.Item) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    private val bigAdapter = BigSectionAdapter()
-    private val smallAdapter = SmallSectionAdapter()
+    private val bigAdapter = BigSectionAdapter(onClick)
+    private val smallAdapter = SmallSectionAdapter(onClick)
 
     fun bind(item: Content.Section) {
         val adapter = if (item is Content.Section.Big) bigAdapter else smallAdapter

@@ -7,8 +7,15 @@ import at.aau.iteractivesystems.library.databinding.ItemSectionSmallBinding
 import at.aau.iteractivesystems.library.ui.adapter.Content
 
 class SmallViewHolder(
-    private val binding: ItemSectionSmallBinding
+    private val binding: ItemSectionSmallBinding,
+    private val onClick: (Int) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
+
+    init {
+        binding.root.setOnClickListener {
+            onClick(adapterPosition)
+        }
+    }
 
     fun bind(item: Content.Section.Item) {
         binding.image.background = AppCompatResources.getDrawable(
