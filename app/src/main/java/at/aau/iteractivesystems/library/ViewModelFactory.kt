@@ -3,7 +3,6 @@ package at.aau.iteractivesystems.library
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import at.aau.iteractivesystems.library.ui.login.LoginViewModel
-import at.aau.iteractivesystems.library.ui.main.borrowed.BorrowedBooksViewModel
 import at.aau.iteractivesystems.library.ui.main.discover.DiscoverViewModel
 import at.aau.iteractivesystems.library.ui.main.reserved.ReservedViewModel
 import at.aau.iteractivesystems.library.ui.main.search.SearchDialogViewModel
@@ -24,7 +23,6 @@ class ViewModelFactory(
                 booksRepository = environment.booksRepository,
                 recentlyVisitedRepository = environment.recentlyVisitedRepository,
             )) as T
-            modelClass.isAssignableFrom(BorrowedBooksViewModel::class.java) -> (BorrowedBooksViewModel()) as T
             modelClass.isAssignableFrom(ReservedViewModel::class.java) -> (ReservedViewModel()) as T
             modelClass.isAssignableFrom(SearchDialogViewModel::class.java) -> (SearchDialogViewModel()) as T
             modelClass.isAssignableFrom(SearchTextViewModel::class.java) -> (SearchTextViewModel()) as T

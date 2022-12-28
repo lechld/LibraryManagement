@@ -26,11 +26,6 @@
         tools:layout="@layout/fragment_reserved" />
 
     <fragment
-        android:id="@+id/borrowed"
-        android:name="at.aau.iteractivesystems.library.ui.main.borrowed.BorrowedBooksFragment"
-        tools:layout="@layout/fragment_borrowed_books" />
-
-    <fragment
         android:id="@+id/profile"
         android:name="at.aau.iteractivesystems.library.ui.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile" />

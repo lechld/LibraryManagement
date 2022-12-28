@@ -8,11 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import at.aau.iteractivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.ViewModelFactory
-import at.aau.iteractivesystems.library.databinding.FragmentBorrowedBooksBinding
 import at.aau.iteractivesystems.library.databinding.FragmentReservedBinding
-import at.aau.iteractivesystems.library.ui.main.borrowed.BorrowedBooksViewModel
 
-class ReservedFragment: Fragment() {
+class ReservedFragment : Fragment() {
 
     private var binding: FragmentReservedBinding? = null
 
