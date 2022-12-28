@@ -16,7 +16,9 @@ private const val HEADLINE_VIEW_TYPE = 0
 private const val HEADLINE_SMALL_VIEW_TYPE = 1
 private const val SECTION_VIEW_TYPE = 2
 
-class ContentAdapter : ListAdapter<Content, RecyclerView.ViewHolder>(ContentDiffUtil()) {
+class ContentAdapter(
+    private val onSectionItemClick: (Content.Section.Item) -> Unit,
+) : ListAdapter<Content, RecyclerView.ViewHolder>(ContentDiffUtil()) {
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
@@ -44,7 +46,7 @@ class ContentAdapter : ListAdapter<Content, RecyclerView.ViewHolder>(ContentDiff
             SECTION_VIEW_TYPE -> {
                 val binding = ItemSectionBinding.inflate(inflater, parent, false)
 
-                SectionViewHolder(binding)
+                SectionViewHolder(binding, onSectionItemClick)
             }
             else -> throw IllegalStateException("Invalid viewType!")
         }

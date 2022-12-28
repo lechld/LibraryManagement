@@ -29,7 +29,7 @@ The project is split into three main packages.
 ### [model](https://github.com/lechld/LibraryManagement/tree/develop/app/src/main/java/at/aau/iteractivesystems/library/model)
 
 Real world entities (
-eg.: [Book](https://github.com/lechld/LibraryManagement/tree/develop/app/src/main/java/at/aau/iteractivesystems/library/model))
+eg.: [Book](https://github.com/lechld/LibraryManagement/tree/develop/app/src/main/java/at/aau/iteractivesystems/library/model/Book.kt))
 modelled into (data) classes.
 
 ### [repository](https://github.com/lechld/LibraryManagement/tree/develop/app/src/main/java/at/aau/iteractivesystems/library/repository)

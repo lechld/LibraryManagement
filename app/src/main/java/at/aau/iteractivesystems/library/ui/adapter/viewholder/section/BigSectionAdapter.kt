@@ -9,9 +9,9 @@ import at.aau.iteractivesystems.library.ui.adapter.Content
 
 private const val BIG_VIEW_TYPE = 0
 
-class BigSectionAdapter : ListAdapter<Content.Section.Item, RecyclerView.ViewHolder>(
-    SectionItemDiffUtl()
-) {
+class BigSectionAdapter(
+    private val onClick: (Content.Section.Item) -> Unit,
+) : ListAdapter<Content.Section.Item, RecyclerView.ViewHolder>(SectionItemDiffUtl()) {
 
     override fun getItemViewType(position: Int): Int {
         return BIG_VIEW_TYPE
@@ -21,7 +21,9 @@ class BigSectionAdapter : ListAdapter<Content.Section.Item, RecyclerView.ViewHol
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemSectionBigBinding.inflate(inflater, parent, false)
 
-        return BigViewHolder(binding)
+        return BigViewHolder(binding) { position ->
+            onClick(getItem(position))
+        }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

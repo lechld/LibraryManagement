@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import at.aau.iteractivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.ViewModelFactory
 import at.aau.iteractivesystems.library.databinding.FragmentDiscoverBinding
@@ -20,7 +21,12 @@ class DiscoverFragment : Fragment() {
     }
 
     private val adapter by lazy {
-        ContentAdapter()
+        ContentAdapter { clickedSectionItem ->
+            val navController = view?.findNavController() ?: return@ContentAdapter
+            val action = DiscoverFragmentDirections.actionDiscoverToDetail(clickedSectionItem.id)
+
+            navController.navigate(action)
+        }
     }
 
     override fun onCreateView(

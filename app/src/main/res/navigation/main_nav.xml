@@ -8,7 +8,17 @@
     <fragment
         android:id="@+id/discover"
         android:name="at.aau.iteractivesystems.library.ui.main.discover.DiscoverFragment"
-        tools:layout="@layout/fragment_discover" />
+        tools:layout="@layout/fragment_discover">
+
+        <action
+            android:id="@+id/action_discover_to_detail"
+            app:destination="@id/book_detail"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/reserved"
@@ -24,5 +34,17 @@
         android:id="@+id/profile"
         android:name="at.aau.iteractivesystems.library.ui.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/book_detail"
+        android:name="at.aau.iteractivesystems.library.ui.bookdetail.DetailFragment"
+        tools:layout="@layout/fragment_detail">
+
+        <argument
+            android:name="bookId"
+            app:argType="string"
+            app:nullable="false" />
+
+    </fragment>
 
 </navigation>
