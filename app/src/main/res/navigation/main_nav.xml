@@ -12,7 +12,11 @@
 
         <action
             android:id="@+id/action_discover_to_detail"
-            app:destination="@id/book_detail" />
+            app:destination="@id/book_detail"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
 
     </fragment>
 
