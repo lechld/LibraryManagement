@@ -1,8 +1,8 @@
-package at.aau.iteractivesystems.library.ui.main.adapter.viewholder
+package at.aau.iteractivesystems.library.ui.adapter.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import at.aau.iteractivesystems.library.databinding.ItemHeadlineBinding
-import at.aau.iteractivesystems.library.ui.main.adapter.Content
+import at.aau.iteractivesystems.library.ui.adapter.Content
 
 class HeadlineViewHolder(
     private val binding: ItemHeadlineBinding

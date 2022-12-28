@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import at.aau.iteractivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.ViewModelFactory
 import at.aau.iteractivesystems.library.databinding.FragmentDiscoverBinding
-import at.aau.iteractivesystems.library.ui.main.adapter.ContentAdapter
+import at.aau.iteractivesystems.library.ui.adapter.ContentAdapter
 
 class DiscoverFragment : Fragment() {
 
