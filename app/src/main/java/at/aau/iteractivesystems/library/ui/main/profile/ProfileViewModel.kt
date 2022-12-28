@@ -1,4 +1,4 @@
-package at.aau.iteractivesystems.library.ui.profile
+package at.aau.iteractivesystems.library.ui.main.profile
 
 import androidx.lifecycle.ViewModel
 

@@ -1,4 +1,4 @@
-package at.aau.iteractivesystems.library.ui.main.discover
+package at.aau.iteractivesystems.library.ui.main.explore
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,21 +9,21 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import at.aau.iteractivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.ViewModelFactory
-import at.aau.iteractivesystems.library.databinding.FragmentDiscoverBinding
+import at.aau.iteractivesystems.library.databinding.FragmentExploreBinding
 import at.aau.iteractivesystems.library.ui.adapter.ContentAdapter
 
-class DiscoverFragment : Fragment() {
+class ExploreFragment : Fragment() {
 
-    private var binding: FragmentDiscoverBinding? = null
+    private var binding: FragmentExploreBinding? = null
 
     private val viewModel by lazy {
-        ViewModelProvider(this, ViewModelFactory(EnvironmentImpl))[DiscoverViewModel::class.java]
+        ViewModelProvider(this, ViewModelFactory(EnvironmentImpl))[ExploreViewModel::class.java]
     }
 
     private val adapter by lazy {
         ContentAdapter { clickedSectionItem ->
             val navController = view?.findNavController() ?: return@ContentAdapter
-            val action = DiscoverFragmentDirections.actionDiscoverToDetail(clickedSectionItem.id)
+            val action = ExploreFragmentDirections.actionExploreToDetail(clickedSectionItem.id)
 
             navController.navigate(action)
         }
@@ -34,7 +34,7 @@ class DiscoverFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentDiscoverBinding.inflate(inflater, container, false)
+        val binding = FragmentExploreBinding.inflate(inflater, container, false)
         this.binding = binding
 
         return binding.root
@@ -51,18 +51,18 @@ class DiscoverFragment : Fragment() {
         super.onDestroyView()
     }
 
-    private fun setupUi(binding: FragmentDiscoverBinding) {
+    private fun setupUi(binding: FragmentExploreBinding) {
         binding.recycler.adapter = adapter
 
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
-                is DiscoverViewModel.State.Loaded -> {
+                is ExploreViewModel.State.Loaded -> {
                     adapter.submitList(state.items)
                 }
-                is DiscoverViewModel.State.Error -> {
+                is ExploreViewModel.State.Error -> {
                     // TODO
                 }
-                DiscoverViewModel.State.Loading -> {
+                ExploreViewModel.State.Loading -> {
                     // TODO
                 }
             }
