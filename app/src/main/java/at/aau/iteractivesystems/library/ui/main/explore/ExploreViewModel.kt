@@ -1,4 +1,4 @@
-package at.aau.iteractivesystems.library.ui.main.discover
+package at.aau.iteractivesystems.library.ui.main.explore
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,7 +12,7 @@ import at.aau.iteractivesystems.library.ui.adapter.Content
 import at.aau.iteractivesystems.library.ui.utils.AndroidString
 import kotlinx.coroutines.launch
 
-class DiscoverViewModel(
+class ExploreViewModel(
     private val recommendationRepository: RecommendationRepository,
     private val booksRepository: BooksRepository,
     private val recentlyVisitedRepository: RecentlyVisitedRepository,

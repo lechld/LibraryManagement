@@ -4,20 +4,20 @@
     <!-- TODO: Provide proper icons -->
 
     <item
-        android:id="@+id/discover"
+        android:id="@+id/explore"
         android:enabled="true"
-        android:icon="@android:drawable/ic_dialog_info"
-        android:title="@string/discover" />
+        android:icon="@drawable/tips_and_updates"
+        android:title="@string/explore" />
 
     <item
-        android:id="@+id/reserved"
+        android:id="@+id/home"
         android:enabled="true"
-        android:icon="@android:drawable/ic_dialog_info"
-        android:title="@string/reserved" />
+        android:icon="@drawable/home"
+        android:title="@string/home" />
 
     <item
         android:id="@+id/profile"
         android:enabled="true"
-        android:icon="@android:drawable/ic_dialog_info"
+        android:icon="@drawable/person"
         android:title="@string/profile" />
 </menu>

@@ -1,4 +1,4 @@
-package at.aau.iteractivesystems.library.ui.profile
+package at.aau.iteractivesystems.library.ui.main.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,14 +8,17 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import at.aau.iteractivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.ViewModelFactory
-import at.aau.iteractivesystems.library.databinding.FragmentProfileBinding
+import at.aau.iteractivesystems.library.databinding.FragmentHomeBinding
 
-class ProfileFragment : Fragment() {
+class HomeFragment : Fragment() {
 
-    private var binding: FragmentProfileBinding? = null
+    private var binding: FragmentHomeBinding? = null
 
     private val viewModel by lazy {
-        ViewModelProvider(this, ViewModelFactory(EnvironmentImpl))[ProfileViewModel::class.java]
+        ViewModelProvider(
+            this,
+            ViewModelFactory(EnvironmentImpl)
+        )[HomeViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -23,7 +26,7 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentProfileBinding.inflate(inflater, container, false)
+        val binding = FragmentHomeBinding.inflate(inflater, container, false)
         this.binding = binding
 
         return binding.root
@@ -39,7 +42,7 @@ class ProfileFragment : Fragment() {
         super.onDestroyView()
     }
 
-    private fun setupUi(binding: FragmentProfileBinding) {
+    private fun setupUi(binding: FragmentHomeBinding) {
         // TODO
     }
 }

@@ -1,4 +1,4 @@
-package at.aau.iteractivesystems.library.ui.main.reserved
+package at.aau.iteractivesystems.library.ui.main.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,17 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import at.aau.iteractivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.ViewModelFactory
-import at.aau.iteractivesystems.library.databinding.FragmentReservedBinding
+import at.aau.iteractivesystems.library.databinding.FragmentProfileBinding
 
-class ReservedFragment : Fragment() {
+class ProfileFragment : Fragment() {
 
-    private var binding: FragmentReservedBinding? = null
+    private var binding: FragmentProfileBinding? = null
 
     private val viewModel by lazy {
-        ViewModelProvider(
-            this,
-            ViewModelFactory(EnvironmentImpl)
-        )[ReservedViewModel::class.java]
+        ViewModelProvider(this, ViewModelFactory(EnvironmentImpl))[ProfileViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -26,7 +23,7 @@ class ReservedFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentReservedBinding.inflate(inflater, container, false)
+        val binding = FragmentProfileBinding.inflate(inflater, container, false)
         this.binding = binding
 
         return binding.root
@@ -42,7 +39,7 @@ class ReservedFragment : Fragment() {
         super.onDestroyView()
     }
 
-    private fun setupUi(binding: FragmentReservedBinding) {
+    private fun setupUi(binding: FragmentProfileBinding) {
         // TODO
     }
 }

@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">Book Keeper</string>
-    <string name="discover">Discover</string>
-    <string name="borrowed">Borrowed</string>
-    <string name="reserved">Reserved</string>
+    <string name="explore">Explore</string>
+    <string name="home">Home</string>
     <string name="profile">Profile</string>
     <string name="recently_visited">Recently visited</string>
     <string name="search_hint">Search for any book you like 📖</string>
