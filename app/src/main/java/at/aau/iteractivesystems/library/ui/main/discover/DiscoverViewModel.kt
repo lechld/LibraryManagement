@@ -5,10 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import at.aau.iteractivesystems.library.R
-import at.aau.iteractivesystems.library.persistance.books.BooksRepository
-import at.aau.iteractivesystems.library.persistance.books.RecentlyVisitedRepository
-import at.aau.iteractivesystems.library.persistance.books.RecommendationRepository
-import at.aau.iteractivesystems.library.ui.main.adapter.Content
+import at.aau.iteractivesystems.library.repository.books.BooksRepository
+import at.aau.iteractivesystems.library.repository.books.RecentlyVisitedRepository
+import at.aau.iteractivesystems.library.repository.books.RecommendationRepository
+import at.aau.iteractivesystems.library.ui.adapter.Content
 import at.aau.iteractivesystems.library.ui.utils.AndroidString
 import kotlinx.coroutines.launch
 

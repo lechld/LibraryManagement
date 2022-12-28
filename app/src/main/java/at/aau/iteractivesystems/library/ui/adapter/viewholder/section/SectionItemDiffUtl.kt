@@ -1,7 +1,7 @@
-package at.aau.iteractivesystems.library.ui.main.adapter.viewholder.section
+package at.aau.iteractivesystems.library.ui.adapter.viewholder.section
 
 import androidx.recyclerview.widget.DiffUtil
-import at.aau.iteractivesystems.library.ui.main.adapter.Content
+import at.aau.iteractivesystems.library.ui.adapter.Content
 
 class SectionItemDiffUtl : DiffUtil.ItemCallback<Content.Section.Item>() {
 

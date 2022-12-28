@@ -1,35 +1,34 @@
-package at.aau.iteractivesystems.library.ui.main.adapter.viewholder.section
+package at.aau.iteractivesystems.library.ui.adapter.viewholder.section
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import at.aau.iteractivesystems.library.databinding.ItemSectionBigBinding
-import at.aau.iteractivesystems.library.ui.main.adapter.Content
+import at.aau.iteractivesystems.library.databinding.ItemSectionSmallBinding
+import at.aau.iteractivesystems.library.ui.adapter.Content
 
-private const val BIG_VIEW_TYPE = 0
+private const val SMALL_VIEW_TYPE = 0
 
-class BigSectionAdapter : ListAdapter<Content.Section.Item, RecyclerView.ViewHolder>(
+class SmallSectionAdapter : ListAdapter<Content.Section.Item, RecyclerView.ViewHolder>(
     SectionItemDiffUtl()
 ) {
 
     override fun getItemViewType(position: Int): Int {
-        return BIG_VIEW_TYPE
+        return SMALL_VIEW_TYPE
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ItemSectionBigBinding.inflate(inflater, parent, false)
+        val binding = ItemSectionSmallBinding.inflate(inflater, parent, false)
 
-        return BigViewHolder(binding)
+        return SmallViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position) as Content.Section.Item
 
-        if (holder is BigViewHolder) {
+        if (holder is SmallViewHolder) {
             holder.bind(item)
         } else throw IllegalStateException("Invalid ViewHolder!")
     }
-
 }
