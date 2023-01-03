@@ -16,6 +16,12 @@ class ErrorView @JvmOverloads constructor(
     defStyleRes: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr, defStyleRes) {
 
+    var reloadListener: (() -> Unit?)? = null
+        set(value) {
+            field = value
+            binding.retryButton.setOnClickListener { value?.invoke() }
+        }
+
     private val binding: ViewErrorBinding =
         ViewErrorBinding.inflate(LayoutInflater.from(context), this, true)
 

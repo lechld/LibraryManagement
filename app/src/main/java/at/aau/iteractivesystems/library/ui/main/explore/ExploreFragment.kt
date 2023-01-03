@@ -59,7 +59,6 @@ class ExploreFragment : Fragment() {
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is ViewState.Failure -> {
-                    binding.swipeRefresh.isRefreshing = false
                     binding.recycler.isVisible = false
                     binding.loadingView.isVisible = false
                     binding.errorView.setError(state.exception)
@@ -67,7 +66,6 @@ class ExploreFragment : Fragment() {
                 is ViewState.Success -> {
                     adapter.submitList(state.data)
 
-                    binding.swipeRefresh.isRefreshing = false
                     binding.recycler.isVisible = true
                     binding.loadingView.isVisible = false
                     binding.errorView.setError(null)
@@ -80,7 +78,7 @@ class ExploreFragment : Fragment() {
             }
         }
 
-        binding.swipeRefresh.setOnRefreshListener {
+        binding.errorView.reloadListener = {
             viewModel.reload()
         }
     }
