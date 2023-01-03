@@ -1,3 +1,3 @@
 package at.aau.iteractivesystems.library
 
-const val MOCK_LOADING_DELAY = 1000L
+const val MOCK_LOADING_DELAY = 2000L

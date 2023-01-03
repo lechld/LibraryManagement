@@ -1,6 +1,7 @@
-package at.aau.iteractivesystems.library.repository.books
+package at.aau.interactivesystems.library.repository.books
 
 import at.aau.iteractivesystems.library.model.Book
+import at.aau.iteractivesystems.library.repository.books.BooksRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.time.LocalDate

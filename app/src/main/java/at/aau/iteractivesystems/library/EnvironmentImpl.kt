@@ -1,5 +1,8 @@
 package at.aau.iteractivesystems.library
 
+import at.aau.interactivesystems.library.repository.books.BooksRepositoryImpl
+import at.aau.interactivesystems.library.repository.books.RecentlyVisitedRepositoryImpl
+import at.aau.interactivesystems.library.repository.books.RecommendationRepositoryImpl
 import at.aau.iteractivesystems.library.repository.books.*
 import at.aau.iteractivesystems.library.repository.user.UserRepository
 import at.aau.iteractivesystems.library.repository.user.UserRepositoryImpl

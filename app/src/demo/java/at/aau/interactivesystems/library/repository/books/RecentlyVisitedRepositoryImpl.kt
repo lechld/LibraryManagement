@@ -1,6 +1,7 @@
-package at.aau.iteractivesystems.library.repository.books
+package at.aau.interactivesystems.library.repository.books
 
 import at.aau.iteractivesystems.library.MOCK_LOADING_DELAY
+import at.aau.iteractivesystems.library.repository.books.RecentlyVisitedRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
