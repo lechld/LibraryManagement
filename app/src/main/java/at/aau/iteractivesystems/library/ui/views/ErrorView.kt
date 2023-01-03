@@ -19,7 +19,7 @@ class ErrorView @JvmOverloads constructor(
     private val binding: ViewErrorBinding =
         ViewErrorBinding.inflate(LayoutInflater.from(context), this, true)
 
-    fun setError(error: Exception?) {
+    fun setError(error: Throwable?) {
         val errorRes = if (error is IOException) {
             R.string.connection_error_message
         } else {

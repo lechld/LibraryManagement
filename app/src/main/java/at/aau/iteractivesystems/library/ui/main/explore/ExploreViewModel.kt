@@ -10,6 +10,7 @@ import at.aau.iteractivesystems.library.repository.books.RecentlyVisitedReposito
 import at.aau.iteractivesystems.library.repository.books.RecommendationRepository
 import at.aau.iteractivesystems.library.ui.adapter.Content
 import at.aau.iteractivesystems.library.ui.utils.AndroidString
+import at.aau.iteractivesystems.library.ui.utils.ViewState
 import kotlinx.coroutines.launch
 
 class ExploreViewModel(
@@ -18,14 +19,10 @@ class ExploreViewModel(
     private val recentlyVisitedRepository: RecentlyVisitedRepository,
 ) : ViewModel() {
 
-    sealed class State {
-        object Loading : State()
-        data class Error(val error: Exception) : State()
-        data class Loaded(val items: List<Content>) : State()
-    }
+    private val _state: MutableLiveData<ViewState<List<Content>>> =
+        MutableLiveData(ViewState.Loading())
 
-    private val _state: MutableLiveData<State> = MutableLiveData(State.Loading)
-    val state: LiveData<State>
+    val state: LiveData<ViewState<List<Content>>>
         get() = _state
 
     init {
@@ -33,7 +30,7 @@ class ExploreViewModel(
     }
 
     fun reload() {
-        _state.postValue(State.Loading)
+        _state.postValue(ViewState.Loading(null))
 
         viewModelScope.launch {
             try {
@@ -42,9 +39,9 @@ class ExploreViewModel(
                 content.addAll(getRecentlyVisitedSection())
                 content.addAll(getSuggestedSection())
 
-                _state.postValue(State.Loaded(content))
+                _state.postValue(ViewState.Success(content))
             } catch (error: Exception) {
-                _state.postValue(State.Error(error))
+                _state.postValue(ViewState.Failure(error))
             }
         }
     }

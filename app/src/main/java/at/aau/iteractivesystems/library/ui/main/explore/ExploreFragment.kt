@@ -12,6 +12,7 @@ import at.aau.iteractivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.ViewModelFactory
 import at.aau.iteractivesystems.library.databinding.FragmentExploreBinding
 import at.aau.iteractivesystems.library.ui.adapter.ContentAdapter
+import at.aau.iteractivesystems.library.ui.utils.ViewState
 
 class ExploreFragment : Fragment() {
 
@@ -57,16 +58,23 @@ class ExploreFragment : Fragment() {
 
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
-                is ExploreViewModel.State.Error -> {
+                is ViewState.Failure -> {
+                    binding.swipeRefresh.isRefreshing = false
+                    binding.recycler.isVisible = false
                     binding.loadingView.isVisible = false
-                    binding.errorView.setError(state.error)
+                    binding.errorView.setError(state.exception)
                 }
-                is ExploreViewModel.State.Loaded -> {
+                is ViewState.Success -> {
+                    adapter.submitList(state.data)
+
+                    binding.swipeRefresh.isRefreshing = false
+                    binding.recycler.isVisible = true
                     binding.loadingView.isVisible = false
                     binding.errorView.setError(null)
-                    adapter.submitList(state.items)
                 }
-                ExploreViewModel.State.Loading -> {
+                is ViewState.Loading -> {
+                    binding.recycler.isVisible = false
+                    binding.errorView.setError(null)
                     binding.loadingView.isVisible = true
                 }
             }
