@@ -9,7 +9,8 @@ data class Recommendation(
     val items: List<Item>
 ) {
     data class Item(
-        val coverId: String,
+        val id: String,
+        val coverUrl: String,
         val title: String,
         val author: String,
     )

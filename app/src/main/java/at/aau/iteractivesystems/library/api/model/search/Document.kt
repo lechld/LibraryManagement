@@ -1,5 +1,6 @@
 package at.aau.iteractivesystems.library.api.model.search
 
+import at.aau.iteractivesystems.library.api.COVERS_ENDPOINT
 import kotlinx.serialization.SerialName
 
 @kotlinx.serialization.Serializable
@@ -25,4 +26,6 @@ data class Document(
 
     @SerialName("author_key")
     val authorKey: List<String> = emptyList()
-)
+) {
+    val coverUrl: String? = if (coverId != null) COVERS_ENDPOINT + "id/$coverId-L.jpg" else null
+}

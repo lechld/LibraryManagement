@@ -95,10 +95,11 @@ class RecommendationRepositoryImpl(
 
     private fun mapItems(docs: List<Document>): List<Recommendation.Item> {
         return docs.mapNotNull { document ->
-            val coverId = document.coverId ?: return@mapNotNull null
-            val authorName = document.authorName?.firstOrNull() ?: return@mapNotNull null // assume first author is nice enough
+            val id = document.coverId ?: return@mapNotNull null
+            val coverUrl = document.coverUrl ?: return@mapNotNull null
+            val authorName = document.authorName.firstOrNull() ?: return@mapNotNull null // assume first author is nice enough
 
-            Recommendation.Item(coverId, document.title, authorName)
+            Recommendation.Item(id, coverUrl, document.title, authorName)
         }
     }
 }

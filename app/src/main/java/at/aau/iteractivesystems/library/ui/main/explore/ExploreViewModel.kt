@@ -55,7 +55,7 @@ class ExploreViewModel(
                 val items = recommendation.items.mapNotNull { recommendationItem ->
                     Content.Section.Item(
                         id = recommendationItem.title,
-                        image = recommendationItem.coverId,
+                        image = recommendationItem.coverUrl,
                         title = recommendationItem.title
                     )
                 }
