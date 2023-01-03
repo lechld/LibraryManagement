@@ -17,6 +17,10 @@ class SectionViewHolder(
     private val bigAdapter = BigSectionAdapter(onClick)
     private val smallAdapter = SmallSectionAdapter(onClick)
 
+    init {
+        binding.recycler.itemAnimator = null
+    }
+
     fun bind(item: Content.Section) {
         this.section = item
 

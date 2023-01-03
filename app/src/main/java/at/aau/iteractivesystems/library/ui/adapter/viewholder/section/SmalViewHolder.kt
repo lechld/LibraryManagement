@@ -1,10 +1,9 @@
 package at.aau.iteractivesystems.library.ui.adapter.viewholder.section
 
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
-import at.aau.iteractivesystems.library.R
 import at.aau.iteractivesystems.library.databinding.ItemSectionSmallBinding
 import at.aau.iteractivesystems.library.ui.adapter.Content
+import com.bumptech.glide.Glide
 
 class SmallViewHolder(
     private val binding: ItemSectionSmallBinding,
@@ -18,9 +17,10 @@ class SmallViewHolder(
     }
 
     fun bind(item: Content.Section.Item) {
-        binding.image.background = AppCompatResources.getDrawable(
-            binding.root.context, R.color.md_theme_dark_primary
-        )
+        Glide.with(binding.root.context)
+            .load(item.imageUrl)
+            .into(binding.image)
+
         binding.title.text = item.title
     }
 }
