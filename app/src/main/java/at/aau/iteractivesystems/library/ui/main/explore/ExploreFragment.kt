@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -11,6 +12,7 @@ import at.aau.iteractivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.ViewModelFactory
 import at.aau.iteractivesystems.library.databinding.FragmentExploreBinding
 import at.aau.iteractivesystems.library.ui.adapter.ContentAdapter
+import at.aau.iteractivesystems.library.ui.utils.ViewState
 
 class ExploreFragment : Fragment() {
 
@@ -56,16 +58,30 @@ class ExploreFragment : Fragment() {
 
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
-                is ExploreViewModel.State.Loaded -> {
-                    adapter.submitList(state.items)
+                is ViewState.Failure -> {
+                    binding.swipeRefresh.isRefreshing = false
+                    binding.recycler.isVisible = false
+                    binding.loadingView.isVisible = false
+                    binding.errorView.setError(state.exception)
                 }
-                is ExploreViewModel.State.Error -> {
-                    // TODO
+                is ViewState.Success -> {
+                    adapter.submitList(state.data)
+
+                    binding.swipeRefresh.isRefreshing = false
+                    binding.recycler.isVisible = true
+                    binding.loadingView.isVisible = false
+                    binding.errorView.setError(null)
                 }
-                ExploreViewModel.State.Loading -> {
-                    // TODO
+                is ViewState.Loading -> {
+                    binding.recycler.isVisible = false
+                    binding.errorView.setError(null)
+                    binding.loadingView.isVisible = true
                 }
             }
+        }
+
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.reload()
         }
     }
 }
