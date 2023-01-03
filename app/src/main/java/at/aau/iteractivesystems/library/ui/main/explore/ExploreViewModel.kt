@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import at.aau.iteractivesystems.library.R
-import at.aau.iteractivesystems.library.repository.books.BooksRepository
-import at.aau.iteractivesystems.library.repository.books.RecentlyVisitedRepository
 import at.aau.iteractivesystems.library.repository.books.RecommendationRepository
 import at.aau.iteractivesystems.library.ui.adapter.Content
 import at.aau.iteractivesystems.library.ui.utils.AndroidString
@@ -15,8 +13,6 @@ import kotlinx.coroutines.launch
 
 class ExploreViewModel(
     private val recommendationRepository: RecommendationRepository,
-    private val booksRepository: BooksRepository,
-    private val recentlyVisitedRepository: RecentlyVisitedRepository,
 ) : ViewModel() {
 
     private val _state: MutableLiveData<ViewState<List<Content>>> =
@@ -36,7 +32,6 @@ class ExploreViewModel(
             try {
                 val content = mutableListOf<Content>()
 
-                content.addAll(getRecentlyVisitedSection())
                 content.addAll(getSuggestedSection())
 
                 _state.postValue(ViewState.Success(content))
@@ -46,23 +41,6 @@ class ExploreViewModel(
         }
     }
 
-    private suspend fun getRecentlyVisitedSection(): List<Content> {
-        val recentlyVisited = recentlyVisitedRepository.getLatestBookIds()
-        val content = mutableListOf<Content>()
-
-        content.add(Content.HeadlineSmall(AndroidString.Resource(R.string.recently_visited)))
-
-        val recentItems = recentlyVisited.mapNotNull { recent ->
-            val book = booksRepository.getBook(recent) ?: return@mapNotNull null
-
-            Content.Section.Item(book.isbn, book.image, book.title)
-        }
-
-        content.add(Content.Section.Small("recently", recentItems))
-
-        return content
-    }
-
     private suspend fun getSuggestedSection(): List<Content> {
         val recommendations = recommendationRepository.getRecommendations()
         val content = mutableListOf<Content>()
@@ -70,14 +48,16 @@ class ExploreViewModel(
         content.add(Content.Headline(AndroidString.Resource(R.string.discover_content_header)))
 
         recommendations.forEach { recommendation ->
-            val items = recommendation.bookIds.mapNotNull { bookId ->
-                val book = booksRepository.getBook(bookId) ?: return@mapNotNull null
-
-                Content.Section.Item(book.isbn, book.image, book.title)
+            val items = recommendation.items.map { recommendationItem ->
+                Content.Section.Item(
+                    id = recommendationItem.id,
+                    imageUrl = recommendationItem.coverUrl,
+                    title = recommendationItem.title
+                )
             }
 
             if (items.isNotEmpty()) {
-                content.add(Content.HeadlineSmall(AndroidString.Text(recommendation.title)))
+                content.add(Content.HeadlineSmall(AndroidString.Resource(recommendation.titleRes)))
                 content.add(Content.Section.Big(recommendation.id, items))
             }
         }

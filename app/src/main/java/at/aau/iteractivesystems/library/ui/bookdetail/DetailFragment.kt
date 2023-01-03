@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
-import at.aau.iteractivesystems.library.EnvironmentImpl
-import at.aau.iteractivesystems.library.ViewModelFactory
+import at.aau.interactivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.databinding.FragmentDetailBinding
 
 class DetailFragment : Fragment() {

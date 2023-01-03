@@ -10,7 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
-import at.aau.iteractivesystems.library.EnvironmentImpl
+import at.aau.interactivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.R
 import at.aau.iteractivesystems.library.ViewModelFactory
 import at.aau.iteractivesystems.library.databinding.DialogFragmentSeachBinding
