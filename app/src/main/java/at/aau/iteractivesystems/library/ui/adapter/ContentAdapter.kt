@@ -3,11 +3,11 @@ package at.aau.iteractivesystems.library.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import at.aau.iteractivesystems.library.databinding.ItemHeadlineBinding
 import at.aau.iteractivesystems.library.databinding.ItemHeadlineSmallBinding
 import at.aau.iteractivesystems.library.databinding.ItemSectionBinding
+import at.aau.iteractivesystems.library.ui.adapter.staterestoration.NestedRecyclerViewStateRecoverAdapter
 import at.aau.iteractivesystems.library.ui.adapter.viewholder.HeadlineSmallViewHolder
 import at.aau.iteractivesystems.library.ui.adapter.viewholder.HeadlineViewHolder
 import at.aau.iteractivesystems.library.ui.adapter.viewholder.SectionViewHolder
@@ -18,7 +18,7 @@ private const val SECTION_VIEW_TYPE = 2
 
 class ContentAdapter(
     private val onSectionItemClick: (Content.Section.Item) -> Unit,
-) : ListAdapter<Content, RecyclerView.ViewHolder>(ContentDiffUtil()) {
+) : NestedRecyclerViewStateRecoverAdapter<Content, RecyclerView.ViewHolder>(ContentDiffUtil()) {
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
@@ -67,6 +67,8 @@ class ContentAdapter(
             }
             else -> throw IllegalStateException("Can't bind type!")
         }
+
+        super.onBindViewHolder(holder, position)
     }
 
     private class ContentDiffUtil : DiffUtil.ItemCallback<Content>() {
