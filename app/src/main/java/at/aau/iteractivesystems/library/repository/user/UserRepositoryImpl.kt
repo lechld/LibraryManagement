@@ -18,7 +18,7 @@ class UserRepositoryImpl : UserRepository {
     private var user: User? = null
 
     override suspend fun getUser(): User? = withContext(Dispatchers.IO) {
-        delay(500L) // fake loading takes some time off main thread
+        delay(500L) // fake loading takes some time as user is stored in some file or db.
 
         user
     }

@@ -28,7 +28,7 @@ sealed class Content {
 
         data class Item(
             val id: String,
-            val image: String,
+            val imageUrl: String?,
             val title: String,
         )
     }

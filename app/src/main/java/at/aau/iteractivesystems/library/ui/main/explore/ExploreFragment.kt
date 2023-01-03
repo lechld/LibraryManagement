@@ -8,7 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import at.aau.iteractivesystems.library.EnvironmentImpl
+import at.aau.interactivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.ViewModelFactory
 import at.aau.iteractivesystems.library.databinding.FragmentExploreBinding
 import at.aau.iteractivesystems.library.ui.adapter.ContentAdapter
@@ -59,7 +59,6 @@ class ExploreFragment : Fragment() {
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is ViewState.Failure -> {
-                    binding.swipeRefresh.isRefreshing = false
                     binding.recycler.isVisible = false
                     binding.loadingView.isVisible = false
                     binding.errorView.setError(state.exception)
@@ -67,7 +66,6 @@ class ExploreFragment : Fragment() {
                 is ViewState.Success -> {
                     adapter.submitList(state.data)
 
-                    binding.swipeRefresh.isRefreshing = false
                     binding.recycler.isVisible = true
                     binding.loadingView.isVisible = false
                     binding.errorView.setError(null)
@@ -80,7 +78,7 @@ class ExploreFragment : Fragment() {
             }
         }
 
-        binding.swipeRefresh.setOnRefreshListener {
+        binding.errorView.reloadListener = {
             viewModel.reload()
         }
     }

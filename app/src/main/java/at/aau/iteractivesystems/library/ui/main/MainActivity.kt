@@ -11,7 +11,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
-import at.aau.iteractivesystems.library.EnvironmentImpl
+import at.aau.interactivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.R
 import at.aau.iteractivesystems.library.ViewModelFactory
 import at.aau.iteractivesystems.library.databinding.ActivityMainBinding
