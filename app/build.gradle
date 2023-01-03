@@ -61,6 +61,12 @@ dependencies {
     // https://developer.android.com/jetpack/androidx/releases/viewpager2
     implementation "androidx.viewpager2:viewpager2:1.0.0"
 
+    // https://developer.android.com/jetpack/androidx/releases/swiperefreshlayout
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+    // https://github.com/airbnb/lottie-android
+    implementation "com.airbnb.android:lottie:5.2.0"
+
     testImplementation 'junit:junit:4.13.2'
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'

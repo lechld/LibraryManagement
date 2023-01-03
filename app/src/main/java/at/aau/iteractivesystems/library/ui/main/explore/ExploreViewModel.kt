@@ -32,39 +32,59 @@ class ExploreViewModel(
         reload()
     }
 
-    // TODO: Could be public if we allow some pull-to-refresh or something similar
-    private fun reload() {
+    fun reload() {
+        _state.postValue(State.Loading)
+
         viewModelScope.launch {
-            val recommendations = recommendationRepository.getRecommendations()
-            val recentlyVisited = recentlyVisitedRepository.getLatestBookIds()
-            val content = mutableListOf<Content>()
+            try {
+                val content = mutableListOf<Content>()
 
-            content.add(Content.HeadlineSmall(AndroidString.Resource(R.string.recently_visited)))
+                content.addAll(getRecentlyVisitedSection())
+                content.addAll(getSuggestedSection())
 
-            val recentItems = recentlyVisited.mapNotNull { recent ->
-                val book = booksRepository.getBook(recent) ?: return@mapNotNull null
+                _state.postValue(State.Loaded(content))
+            } catch (error: Exception) {
+                _state.postValue(State.Error(error))
+            }
+        }
+    }
+
+    private suspend fun getRecentlyVisitedSection(): List<Content> {
+        val recentlyVisited = recentlyVisitedRepository.getLatestBookIds()
+        val content = mutableListOf<Content>()
+
+        content.add(Content.HeadlineSmall(AndroidString.Resource(R.string.recently_visited)))
+
+        val recentItems = recentlyVisited.mapNotNull { recent ->
+            val book = booksRepository.getBook(recent) ?: return@mapNotNull null
+
+            Content.Section.Item(book.isbn, book.image, book.title)
+        }
+
+        content.add(Content.Section.Small("recently", recentItems))
+
+        return content
+    }
+
+    private suspend fun getSuggestedSection(): List<Content> {
+        val recommendations = recommendationRepository.getRecommendations()
+        val content = mutableListOf<Content>()
+
+        content.add(Content.Headline(AndroidString.Resource(R.string.discover_content_header)))
+
+        recommendations.forEach { recommendation ->
+            val items = recommendation.bookIds.mapNotNull { bookId ->
+                val book = booksRepository.getBook(bookId) ?: return@mapNotNull null
 
                 Content.Section.Item(book.isbn, book.image, book.title)
             }
 
-            content.add(Content.Section.Small("recently", recentItems))
-
-            content.add(Content.Headline(AndroidString.Resource(R.string.discover_content_header)))
-
-            recommendations.forEach { recommendation ->
-                val items = recommendation.bookIds.mapNotNull { bookId ->
-                    val book = booksRepository.getBook(bookId) ?: return@mapNotNull null
-
-                    Content.Section.Item(book.isbn, book.image, book.title)
-                }
-
-                if (items.isNotEmpty()) {
-                    content.add(Content.HeadlineSmall(AndroidString.Text(recommendation.title)))
-                    content.add(Content.Section.Big(recommendation.id, items))
-                }
+            if (items.isNotEmpty()) {
+                content.add(Content.HeadlineSmall(AndroidString.Text(recommendation.title)))
+                content.add(Content.Section.Big(recommendation.id, items))
             }
-
-            _state.postValue(State.Loaded(content))
         }
+
+        return content
     }
 }

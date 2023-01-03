@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -56,16 +57,23 @@ class ExploreFragment : Fragment() {
 
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
+                is ExploreViewModel.State.Error -> {
+                    binding.loadingView.isVisible = false
+                    binding.errorView.setError(state.error)
+                }
                 is ExploreViewModel.State.Loaded -> {
+                    binding.loadingView.isVisible = false
+                    binding.errorView.setError(null)
                     adapter.submitList(state.items)
                 }
-                is ExploreViewModel.State.Error -> {
-                    // TODO
-                }
                 ExploreViewModel.State.Loading -> {
-                    // TODO
+                    binding.loadingView.isVisible = true
                 }
             }
+        }
+
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.reload()
         }
     }
 }

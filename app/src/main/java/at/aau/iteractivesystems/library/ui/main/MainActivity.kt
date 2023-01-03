@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -16,6 +17,8 @@ import at.aau.iteractivesystems.library.ViewModelFactory
 import at.aau.iteractivesystems.library.databinding.ActivityMainBinding
 import at.aau.iteractivesystems.library.ui.main.search.SearchDialogFragment
 import at.aau.iteractivesystems.library.ui.main.search.SearchTextViewModel
+import com.google.android.material.snackbar.Snackbar
+import java.io.IOException
 
 /**
  * That's the main and startup activity.
@@ -26,6 +29,8 @@ import at.aau.iteractivesystems.library.ui.main.search.SearchTextViewModel
  * to handle transition and navigation between screens.
  */
 class MainActivity : AppCompatActivity() {
+
+    private var binding: ActivityMainBinding? = null
 
     private val searchTextViewModel by lazy {
         ViewModelProvider(this, ViewModelFactory(EnvironmentImpl))[SearchTextViewModel::class.java]
@@ -39,12 +44,29 @@ class MainActivity : AppCompatActivity() {
 
         setupNavigation(binding)
         setupSearch(binding)
+
+        this.binding = binding
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val navController = findNavController(R.id.nav_container)
 
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
+    }
+
+    fun showError(error: Exception) {
+        val binding = this.binding ?: return
+        val resId = if (error is IOException) {
+            R.string.connection_error_message
+        } else R.string.default_error_message
+
+        val snackbar = Snackbar.make(binding.navigationView, resId, Snackbar.LENGTH_LONG)
+        val snackbarLayoutParams = snackbar.view.layoutParams as CoordinatorLayout.LayoutParams
+
+        snackbarLayoutParams.anchorId = R.id.main_nav
+
+        snackbar.show()
+
     }
 
     private fun setupNavigation(binding: ActivityMainBinding) {
