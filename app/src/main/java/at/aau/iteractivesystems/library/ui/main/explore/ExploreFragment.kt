@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import at.aau.interactivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.ViewModelFactory
 import at.aau.iteractivesystems.library.databinding.FragmentExploreBinding
+import at.aau.iteractivesystems.library.ui.adapter.Content
 import at.aau.iteractivesystems.library.ui.adapter.ContentAdapter
 import at.aau.iteractivesystems.library.ui.utils.ViewState
 
@@ -56,24 +57,24 @@ class ExploreFragment : Fragment() {
     private fun setupUi(binding: FragmentExploreBinding) {
         binding.recycler.adapter = adapter
 
-        viewModel.state.observe(viewLifecycleOwner) { state ->
+        viewModel.state.observe(viewLifecycleOwner) { state: ViewState<List<Content>> ->
             when (state) {
-                is ViewState.Failure -> {
+                is ViewState.Failure<List<Content>> -> {
                     binding.recycler.isVisible = false
-                    binding.loadingView.isVisible = false
-                    binding.errorView.setError(state.exception)
+                    binding.loadingView.hide()
+                    binding.errorView.show(state.exception)
                 }
-                is ViewState.Success -> {
+                is ViewState.Success<List<Content>> -> {
                     adapter.submitList(state.data)
 
                     binding.recycler.isVisible = true
-                    binding.loadingView.isVisible = false
-                    binding.errorView.setError(null)
+                    binding.loadingView.hide()
+                    binding.errorView.hide()
                 }
-                is ViewState.Loading -> {
+                is ViewState.Loading<List<Content>> -> {
                     binding.recycler.isVisible = false
-                    binding.errorView.setError(null)
-                    binding.loadingView.isVisible = true
+                    binding.errorView.hide()
+                    binding.loadingView.show()
                 }
             }
         }

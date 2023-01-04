@@ -6,7 +6,6 @@ import io.ktor.client.engine.android.*
 import io.ktor.client.features.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
-import io.ktor.client.features.logging.*
 import io.ktor.client.features.observer.*
 import io.ktor.client.request.*
 import io.ktor.http.*
@@ -28,15 +27,6 @@ val ktorHttpClient = HttpClient(Android) {
     engine {
         connectTimeout = TIMEOUT
         socketTimeout = TIMEOUT
-    }
-
-    install(Logging) {
-        logger = object : Logger {
-            override fun log(message: String) {
-                Log.v("Ktor", message)
-            }
-        }
-        level = LogLevel.ALL
     }
 
     install(ResponseObserver) {
