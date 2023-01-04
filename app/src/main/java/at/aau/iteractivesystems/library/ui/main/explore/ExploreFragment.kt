@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import at.aau.interactivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.ViewModelFactory
 import at.aau.iteractivesystems.library.databinding.FragmentExploreBinding
@@ -25,7 +26,7 @@ class ExploreFragment : Fragment() {
 
     private val adapter by lazy {
         ContentAdapter { clickedSectionItem ->
-            val navController = view?.findNavController() ?: return@ContentAdapter
+            val navController = findNavController()
             val action = ExploreFragmentDirections.actionExploreToDetail(clickedSectionItem.id)
 
             navController.navigate(action)
