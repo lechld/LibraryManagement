@@ -1,4 +1,4 @@
-package at.aau.iteractivesystems.library.ui.login
+package at.aau.iteractivesystems.library.ui.main.profile.register
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,14 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import at.aau.interactivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.ViewModelFactory
-import at.aau.iteractivesystems.library.databinding.FragmentLoginBinding
+import at.aau.iteractivesystems.library.databinding.FragmentRegisterBinding
 
-class LoginFragment : Fragment() {
+class RegisterFragment : Fragment() {
 
-    private var binding: FragmentLoginBinding? = null
+    private var binding: FragmentRegisterBinding? = null
 
     private val viewModel by lazy {
-        ViewModelProvider(this, ViewModelFactory(EnvironmentImpl))[LoginViewModel::class.java]
+        ViewModelProvider(this, ViewModelFactory(EnvironmentImpl))[RegisterViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -23,7 +23,7 @@ class LoginFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentLoginBinding.inflate(inflater, container, false)
+        val binding = FragmentRegisterBinding.inflate(inflater, container, false)
         this.binding = binding
 
         return binding.root
@@ -39,7 +39,7 @@ class LoginFragment : Fragment() {
         super.onDestroyView()
     }
 
-    private fun setupUi(binding: FragmentLoginBinding) {
+    private fun setupUi(binding: FragmentRegisterBinding) {
         // TODO
     }
 }

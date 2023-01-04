@@ -1,4 +1,4 @@
-package at.aau.iteractivesystems.library.ui.main.profile
+package at.aau.iteractivesystems.library.ui.main.profile.login
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,14 +9,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import at.aau.interactivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.ViewModelFactory
-import at.aau.iteractivesystems.library.databinding.FragmentProfileBinding
+import at.aau.iteractivesystems.library.databinding.FragmentLoginBinding
 
-class ProfileFragment : Fragment() {
+class LoginFragment : Fragment() {
 
-    private var binding: FragmentProfileBinding? = null
+    private var binding: FragmentLoginBinding? = null
 
     private val viewModel by lazy {
-        ViewModelProvider(this, ViewModelFactory(EnvironmentImpl))[ProfileViewModel::class.java]
+        ViewModelProvider(this, ViewModelFactory(EnvironmentImpl))[LoginViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -24,7 +24,7 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentProfileBinding.inflate(inflater, container, false)
+        val binding = FragmentLoginBinding.inflate(inflater, container, false)
         this.binding = binding
 
         return binding.root
@@ -40,10 +40,10 @@ class ProfileFragment : Fragment() {
         super.onDestroyView()
     }
 
-    private fun setupUi(binding: FragmentProfileBinding) {
-        binding.loginButton.setOnClickListener {
+    private fun setupUi(binding: FragmentLoginBinding) {
+        binding.registerButton.setOnClickListener {
             val navController = findNavController()
-            val navAction = ProfileFragmentDirections.actionProfileToLogin()
+            val navAction = LoginFragmentDirections.actionLoginToRegister()
 
             navController.navigate(navAction)
         }
