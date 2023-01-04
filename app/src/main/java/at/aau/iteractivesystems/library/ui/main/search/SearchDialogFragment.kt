@@ -14,6 +14,9 @@ import at.aau.interactivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.R
 import at.aau.iteractivesystems.library.ViewModelFactory
 import at.aau.iteractivesystems.library.databinding.DialogFragmentSeachBinding
+import at.aau.iteractivesystems.library.ui.adapter.Content
+import at.aau.iteractivesystems.library.ui.adapter.ContentAdapter
+import at.aau.iteractivesystems.library.ui.utils.ViewState
 
 private const val SEARCH_DIALOG_TAG = "SEARCH_DIALOG_TAG"
 
@@ -32,6 +35,12 @@ class SearchDialogFragment : DialogFragment() {
             // note: owner is activity to allow sharing of search text
             requireActivity(), ViewModelFactory(EnvironmentImpl)
         )[SearchTextViewModel::class.java]
+    }
+
+    private val adapter by lazy {
+        ContentAdapter {
+            // ignore section click, need better separation here.
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,6 +65,7 @@ class SearchDialogFragment : DialogFragment() {
     }
 
     override fun onDestroyView() {
+        binding?.recycler?.adapter = null
         binding = null
         super.onDestroyView()
     }
@@ -85,19 +95,22 @@ class SearchDialogFragment : DialogFragment() {
 
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
-                is SearchDialogViewModel.State.Error -> {
+                is ViewState.Failure<List<Content.SearchResult>> -> {
                     binding.progress.isVisible = false
                 }
-                is SearchDialogViewModel.State.Loaded -> {
+                is ViewState.Success<List<Content.SearchResult>> -> {
+                    adapter.submitList(state.data)
                     binding.progress.isVisible = false
                 }
-                SearchDialogViewModel.State.Loading -> {
+                is ViewState.Loading<List<Content.SearchResult>> -> {
                     binding.progress.isVisible = true
                 }
             }
         }
 
         viewModel.submitQuery(searchTextViewModel.query.value)
+
+        binding.recycler.adapter = adapter
     }
 
     companion object {

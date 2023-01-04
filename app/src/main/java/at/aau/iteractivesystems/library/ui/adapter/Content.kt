@@ -32,4 +32,12 @@ sealed class Content {
             val title: String,
         )
     }
+
+    data class SearchResult(
+        val id: String,
+        val imageUrl: String?,
+        val title: String,
+        val author: String,
+        val publicationYear: String
+    ) : Content()
 }
