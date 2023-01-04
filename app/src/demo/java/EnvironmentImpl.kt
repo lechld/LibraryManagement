@@ -1,7 +1,8 @@
 package at.aau.interactivesystems.library
 
-import at.aau.interactivesystems.library.api.SearchApiImpl
+import at.aau.interactivesystems.library.at.aau.interactivesystems.library.api.search.SearchApiImpl
 import at.aau.iteractivesystems.library.Environment
+import at.aau.iteractivesystems.library.api.search.SearchApi
 import at.aau.iteractivesystems.library.repository.books.RecommendationRepository
 import at.aau.iteractivesystems.library.repository.books.RecommendationsRepositoryImpl
 import at.aau.iteractivesystems.library.repository.user.UserRepository
@@ -12,7 +13,11 @@ object EnvironmentImpl : Environment {
         UserRepositoryImpl()
     }
 
+    override val searchApi: SearchApi by lazy {
+        SearchApiImpl()
+    }
+
     override val recommendationRepository: RecommendationRepository by lazy {
-        RecommendationsRepositoryImpl(SearchApiImpl())
+        RecommendationsRepositoryImpl(searchApi)
     }
 }

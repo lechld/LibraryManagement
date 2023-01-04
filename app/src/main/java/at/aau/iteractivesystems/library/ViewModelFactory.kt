@@ -21,7 +21,9 @@ class ViewModelFactory(
                 recommendationRepository = environment.recommendationRepository,
             )) as T
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> (HomeViewModel()) as T
-            modelClass.isAssignableFrom(SearchDialogViewModel::class.java) -> (SearchDialogViewModel()) as T
+            modelClass.isAssignableFrom(SearchDialogViewModel::class.java) -> (SearchDialogViewModel(
+                searchApi = environment.searchApi,
+            )) as T
             modelClass.isAssignableFrom(SearchTextViewModel::class.java) -> (SearchTextViewModel()) as T
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> (LoginViewModel()) as T
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> (ProfileViewModel()) as T

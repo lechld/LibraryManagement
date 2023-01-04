@@ -6,15 +6,18 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import at.aau.iteractivesystems.library.databinding.ItemHeadlineBinding
 import at.aau.iteractivesystems.library.databinding.ItemHeadlineSmallBinding
+import at.aau.iteractivesystems.library.databinding.ItemSearchResultBinding
 import at.aau.iteractivesystems.library.databinding.ItemSectionBinding
 import at.aau.iteractivesystems.library.ui.adapter.staterestoration.NestedRecyclerViewStateRecoverAdapter
 import at.aau.iteractivesystems.library.ui.adapter.viewholder.HeadlineSmallViewHolder
 import at.aau.iteractivesystems.library.ui.adapter.viewholder.HeadlineViewHolder
+import at.aau.iteractivesystems.library.ui.adapter.viewholder.SearchResultViewHolder
 import at.aau.iteractivesystems.library.ui.adapter.viewholder.SectionViewHolder
 
 private const val HEADLINE_VIEW_TYPE = 0
 private const val HEADLINE_SMALL_VIEW_TYPE = 1
 private const val SECTION_VIEW_TYPE = 2
+private const val SEARCH_ITEM_VIEW_TYPE = 3
 
 class ContentAdapter(
     private val onSectionItemClick: (Content.Section.Item) -> Unit,
@@ -25,6 +28,7 @@ class ContentAdapter(
             is Content.Headline -> HEADLINE_VIEW_TYPE
             is Content.HeadlineSmall -> HEADLINE_SMALL_VIEW_TYPE
             is Content.Section -> SECTION_VIEW_TYPE
+            is Content.SearchResult -> SEARCH_ITEM_VIEW_TYPE
             else -> throw IllegalStateException("Invalid ViewHolder type!")
         }
     }
@@ -48,6 +52,11 @@ class ContentAdapter(
 
                 SectionViewHolder(binding, onSectionItemClick)
             }
+            SEARCH_ITEM_VIEW_TYPE -> {
+                val binding = ItemSearchResultBinding.inflate(inflater, parent, false)
+
+                SearchResultViewHolder(binding)
+            }
             else -> throw IllegalStateException("Invalid viewType!")
         }
     }
@@ -64,6 +73,9 @@ class ContentAdapter(
             }
             is SectionViewHolder -> {
                 holder.bind(item as Content.Section)
+            }
+            is SearchResultViewHolder -> {
+                holder.bind(item as Content.SearchResult)
             }
             else -> throw IllegalStateException("Can't bind type!")
         }
@@ -83,6 +95,9 @@ class ContentAdapter(
                 return oldItem.text == newItem.text
             }
             if (oldItem is Content.Section && newItem is Content.Section) {
+                return oldItem.id == newItem.id
+            }
+            if (oldItem is Content.SearchResult && newItem is Content.SearchResult) {
                 return oldItem.id == newItem.id
             }
 
