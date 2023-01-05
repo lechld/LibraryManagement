@@ -10,7 +10,7 @@ import kotlinx.coroutines.withContext
 
 private const val ENDPOINT = OPEN_LIB_ENDPOINT + "search.json"
 private const val SEARCH_LIMIT = 100
-private const val SUBJECT_LIMIT = 20
+private const val SUBJECT_LIMIT = 12
 
 class SearchApiImpl(private val client: HttpClient) : SearchApi {
 
