@@ -8,7 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import at.aau.interactivesystems.library.EnvironmentImpl
+import at.aau.iteractivesystems.library.ViewModelFactory
 import at.aau.iteractivesystems.library.databinding.FragmentDetailBinding
+import at.aau.iteractivesystems.library.ui.adapter.ContentAdapter
+import at.aau.iteractivesystems.library.ui.main.FloatingActionViewModel
+import at.aau.iteractivesystems.library.ui.utils.ViewState
 
 class DetailFragment : Fragment() {
 
@@ -18,6 +22,19 @@ class DetailFragment : Fragment() {
 
     private val bookId by lazy {
         navArgs.bookId
+    }
+
+    private val adapter by lazy {
+        ContentAdapter {
+            // TODO: Need to change the way we handle recycler clicks
+        }
+    }
+
+    private val floatingActionViewModel by lazy {
+        ViewModelProvider(
+            requireActivity(),
+            ViewModelFactory(EnvironmentImpl)
+        )[FloatingActionViewModel::class.java]
     }
 
     private val viewModel by lazy {
@@ -44,11 +61,35 @@ class DetailFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        floatingActionViewModel.setAction(FloatingActionViewModel.Action.Hidden)
+        binding?.recycler?.adapter = null
         binding = null
         super.onDestroyView()
     }
 
     private fun setupUi(binding: FragmentDetailBinding) {
-        // TODO
+        viewModel.state.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is ViewState.Failure -> {
+                    // TODO
+                }
+                is ViewState.Loading -> {
+                    // TODO
+                }
+                is ViewState.Success -> {
+                    adapter.submitList(state.data)
+                }
+            }
+        }
+
+        binding.recycler.adapter = adapter
+
+        floatingActionViewModel.selected.observe(viewLifecycleOwner) {
+            viewModel.toggleBorrowed()
+        }
+
+        viewModel.action.observe(viewLifecycleOwner) { action ->
+            floatingActionViewModel.setAction(action)
+        }
     }
 }

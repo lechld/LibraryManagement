@@ -18,4 +18,5 @@
     <string name="subject_history">History</string>
     <string name="subject_psychology">Psychology</string>
     <string name="retry">Retry</string>
+    <string name="borrow">Borrow</string>
 </resources>
