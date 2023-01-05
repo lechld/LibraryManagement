@@ -1,5 +1,6 @@
 package at.aau.iteractivesystems.library.ui.main
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,7 @@ import at.aau.iteractivesystems.library.ViewModelFactory
 import at.aau.iteractivesystems.library.databinding.ActivityMainBinding
 import at.aau.iteractivesystems.library.ui.main.search.SearchDialogFragment
 import at.aau.iteractivesystems.library.ui.main.search.SearchTextViewModel
+import com.google.android.material.color.MaterialColors
 
 /**
  * That's the main and startup activity.
@@ -93,10 +95,17 @@ class MainActivity : AppCompatActivity() {
     private fun setupFloatingAction(binding: ActivityMainBinding) {
         val addIcon = ResourcesCompat.getDrawable(resources, R.drawable.add, theme)
         val removeIcon = ResourcesCompat.getDrawable(resources, R.drawable.remove, theme)
+        val addColor = MaterialColors.getColor(
+            binding.root, com.google.android.material.R.attr.colorPrimaryInverse
+        )
+        val removeColor = MaterialColors.getColor(
+            binding.root, com.google.android.material.R.attr.colorTertiary
+        )
 
         floatingActionViewModel.action.observe(this) { action ->
             when (action) {
                 FloatingActionViewModel.Action.Add -> {
+                    binding.fab.backgroundTintList = ColorStateList.valueOf(addColor)
                     binding.fab.setImageDrawable(addIcon)
                     binding.fab.isVisible = true
                 }
@@ -104,6 +113,7 @@ class MainActivity : AppCompatActivity() {
                     binding.fab.isVisible = false
                 }
                 FloatingActionViewModel.Action.Remove -> {
+                    binding.fab.backgroundTintList = ColorStateList.valueOf(removeColor)
                     binding.fab.setImageDrawable(removeIcon)
                     binding.fab.isVisible = true
                 }
