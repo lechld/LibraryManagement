@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- TODO: Provide proper icons -->
-
     <item
-        android:id="@+id/explore"
+        android:id="@+id/explore_nav"
         android:enabled="true"
         android:icon="@drawable/tips_and_updates"
         android:title="@string/explore" />
 
     <item
-        android:id="@+id/home"
+        android:id="@+id/home_nav"
         android:enabled="true"
         android:icon="@drawable/home"
         android:title="@string/home" />
 
     <item
-        android:id="@+id/profile"
+        android:id="@+id/profile_nav"
         android:enabled="true"
         android:icon="@drawable/person"
         android:title="@string/profile" />
