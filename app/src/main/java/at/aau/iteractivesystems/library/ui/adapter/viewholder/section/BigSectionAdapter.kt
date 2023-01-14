@@ -10,7 +10,7 @@ import at.aau.iteractivesystems.library.ui.adapter.Content
 private const val BIG_VIEW_TYPE = 0
 
 class BigSectionAdapter(
-    private val onClick: (Content.Section.Item) -> Unit,
+    private val onClick: (Content) -> Unit,
 ) : ListAdapter<Content.Section.Item, RecyclerView.ViewHolder>(SectionItemDiffUtl()) {
 
     override fun getItemViewType(position: Int): Int {

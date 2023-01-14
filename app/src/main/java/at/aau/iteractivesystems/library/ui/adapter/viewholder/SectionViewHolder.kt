@@ -9,7 +9,7 @@ import at.aau.iteractivesystems.library.ui.adapter.viewholder.section.SmallSecti
 
 class SectionViewHolder(
     private val binding: ItemSectionBinding,
-    onClick: (Content.Section.Item) -> Unit,
+    onClick: (Content) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root), NestedRecyclerViewViewHolder {
 
     private var section: Content.Section? = null

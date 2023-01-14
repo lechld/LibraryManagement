@@ -26,10 +26,12 @@ class ExploreFragment : Fragment() {
 
     private val adapter by lazy {
         ContentAdapter { clickedSectionItem ->
-            val navController = findNavController()
-            val action = ExploreFragmentDirections.actionExploreToDetail(clickedSectionItem.id)
+            if (clickedSectionItem is Content.Section.Item) {
+                val navController = findNavController()
+                val action = ExploreFragmentDirections.actionExploreToDetail(clickedSectionItem.id)
 
-            navController.navigate(action)
+                navController.navigate(action)
+            }
         }
     }
 

@@ -8,6 +8,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import at.aau.interactivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.ViewModelFactory
@@ -33,8 +34,13 @@ class SearchFragment : Fragment() {
     }
 
     private val adapter by lazy {
-        ContentAdapter {
-            // ignore section click, need better separation here.
+        ContentAdapter { clickedSectionItem ->
+            if (clickedSectionItem is Content.SearchResult) {
+                val navController = findNavController()
+                val action = SearchFragmentDirections.actionSearchToDetail(clickedSectionItem.id)
+
+                navController.navigate(action)
+            }
         }
     }
 
