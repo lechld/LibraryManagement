@@ -44,8 +44,6 @@ class ProfileFragment : Fragment() {
     private fun setupUi(binding: FragmentProfileBinding) {
         viewModel.isLoggedIn.observe(viewLifecycleOwner) { loggedIn ->
             if (!loggedIn) {
-                val navAction = ProfileFragmentDirections.actionProfileToLogin()
-
                 findNavController().navigate(R.id.login)
             }
         }

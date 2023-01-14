@@ -2,14 +2,12 @@ package at.aau.iteractivesystems.library
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import at.aau.iteractivesystems.library.ui.main.FloatingActionViewModel
 import at.aau.iteractivesystems.library.ui.main.explore.ExploreViewModel
 import at.aau.iteractivesystems.library.ui.main.home.HomeViewModel
 import at.aau.iteractivesystems.library.ui.main.profile.ProfileViewModel
 import at.aau.iteractivesystems.library.ui.main.profile.login.LoginViewModel
 import at.aau.iteractivesystems.library.ui.main.profile.register.RegisterViewModel
-import at.aau.iteractivesystems.library.ui.main.search.SearchDialogViewModel
-import at.aau.iteractivesystems.library.ui.main.search.SearchTextViewModel
+import at.aau.iteractivesystems.library.ui.main.search.SearchViewModel
 
 class ViewModelFactory(
     private val environment: Environment
@@ -25,7 +23,6 @@ class ViewModelFactory(
             modelClass.isAssignableFrom(SearchViewModel::class.java) -> (SearchViewModel(
                 bookRepository = environment.bookRepository,
             )) as T
-            modelClass.isAssignableFrom(SearchTextViewModel::class.java) -> (SearchTextViewModel()) as T
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> (LoginViewModel(
                 userRepository = environment.userRepository,
             )) as T
@@ -35,7 +32,6 @@ class ViewModelFactory(
             modelClass.isAssignableFrom(RegisterViewModel::class.java) -> (RegisterViewModel(
                 userRepository = environment.userRepository,
             )) as T
-            modelClass.isAssignableFrom(FloatingActionViewModel::class.java) -> (FloatingActionViewModel()) as T
             else -> throw IllegalArgumentException("Unknown ViewModel class. Maybe forgot to register it in ViewModelFactory?")
         }
     }

@@ -90,7 +90,6 @@ class ExploreFragment : Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (!query.isNullOrBlank()) {
                     val navAction = ExploreFragmentDirections.actionExploreToSearch(query)
-
                     findNavController().navigate(navAction)
 
                     binding.searchView.setQuery("", false) // Reset query after navigation.
