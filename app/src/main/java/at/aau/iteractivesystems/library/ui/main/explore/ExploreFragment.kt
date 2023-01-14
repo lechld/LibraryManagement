@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -82,5 +83,24 @@ class ExploreFragment : Fragment() {
         binding.errorView.reloadListener = {
             viewModel.reload()
         }
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (!query.isNullOrBlank()) {
+                    val navAction = ExploreFragmentDirections.actionExploreToSearch(query)
+
+                    findNavController().navigate(navAction)
+
+                    binding.searchView.setQuery("", false) // Reset query after navigation.
+                }
+
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+
+        })
     }
 }

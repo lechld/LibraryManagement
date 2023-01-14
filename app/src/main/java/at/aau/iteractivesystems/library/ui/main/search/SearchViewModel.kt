@@ -9,7 +9,7 @@ import at.aau.iteractivesystems.library.ui.adapter.Content
 import at.aau.iteractivesystems.library.ui.utils.ViewState
 import kotlinx.coroutines.launch
 
-class SearchDialogViewModel(
+class SearchViewModel(
     private val bookRepository: BookRepository,
 ) : ViewModel() {
 
