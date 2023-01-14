@@ -10,6 +10,7 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/navigationViewHeight"
         app:defaultNavHost="true"
         app:navGraph="@navigation/main_nav"
         tools:context=".ui.main.MainActivity" />
@@ -18,7 +19,7 @@
         android:id="@+id/navigation_view"
         style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/navigationViewHeight"
         android:layout_gravity="bottom"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/main_navigation_menu" />

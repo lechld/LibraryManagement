@@ -20,7 +20,7 @@ private const val SECTION_VIEW_TYPE = 2
 private const val SEARCH_ITEM_VIEW_TYPE = 3
 
 class ContentAdapter(
-    private val onItemClick: (Content) -> Unit,
+    private val onItemClick: ((Content) -> Unit)? = null,
 ) : NestedRecyclerViewStateRecoverAdapter<Content, RecyclerView.ViewHolder>(ContentDiffUtil()) {
 
     override fun getItemViewType(position: Int): Int {
@@ -56,7 +56,7 @@ class ContentAdapter(
                 val binding = ItemSearchResultBinding.inflate(inflater, parent, false)
 
                 SearchResultViewHolder(binding) { position ->
-                    onItemClick(getItem(position))
+                    onItemClick?.invoke(getItem(position))
                 }
             }
             else -> throw IllegalStateException("Invalid viewType!")

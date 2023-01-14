@@ -2,7 +2,6 @@ package at.aau.iteractivesystems.library
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import at.aau.iteractivesystems.library.ui.main.FloatingActionViewModel
 import at.aau.iteractivesystems.library.ui.main.explore.ExploreViewModel
 import at.aau.iteractivesystems.library.ui.main.home.HomeViewModel
 import at.aau.iteractivesystems.library.ui.main.profile.ProfileViewModel
@@ -27,7 +26,6 @@ class ViewModelFactory(
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> (LoginViewModel()) as T
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> (ProfileViewModel()) as T
             modelClass.isAssignableFrom(RegisterViewModel::class.java) -> (RegisterViewModel()) as T
-            modelClass.isAssignableFrom(FloatingActionViewModel::class.java) -> (FloatingActionViewModel()) as T
             else -> throw IllegalArgumentException("Unknown ViewModel class. Maybe forgot to register it in ViewModelFactory?")
         }
     }
