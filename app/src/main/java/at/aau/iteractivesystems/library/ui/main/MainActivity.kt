@@ -1,17 +1,12 @@
 package at.aau.iteractivesystems.library.ui.main
 
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentContainerView
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
-import at.aau.interactivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.R
-import at.aau.iteractivesystems.library.ViewModelFactory
 import at.aau.iteractivesystems.library.databinding.ActivityMainBinding
 
 /**
@@ -24,33 +19,23 @@ import at.aau.iteractivesystems.library.databinding.ActivityMainBinding
  */
 class MainActivity : AppCompatActivity() {
 
-    private var binding: ActivityMainBinding? = null
+    private lateinit var binding: ActivityMainBinding
 
-    private val viewModelFactory by lazy {
-        ViewModelProvider(this, ViewModelFactory(EnvironmentImpl))
-    }
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupNavigation(binding)
-
-        this.binding = binding
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val navController = findNavController(R.id.nav_container)
-
-        return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
 
     private fun setupNavigation(binding: ActivityMainBinding) {
         val navHost = supportFragmentManager.findFragmentById(R.id.nav_container) as NavHostFragment
-        val controller = navHost.navController
+        navController = navHost.navController
 
-        binding.navigationView.setupWithNavController(controller)
+        binding.navigationView.setupWithNavController(navController)
     }
 }

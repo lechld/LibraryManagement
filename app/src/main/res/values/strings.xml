@@ -21,4 +21,11 @@
     <string name="borrow">Borrow</string>
     <string name="subject_finance">Finance</string>
     <string name="subject_other">Other</string>
+    <string name="dialog_borrow_title">Reserve book?</string>
+    <string name="dialog_borrow_message">Do you really want to reserve this book?</string>
+    <string name="dialog_return_title">Cancel reservation?</string>
+    <string name="dialog_return_message">Do you really want to cancel your reservation on this book?</string>
+    <string name="dialog_yes">Yes</string>
+    <string name="dialog_no">No</string>
+
 </resources>

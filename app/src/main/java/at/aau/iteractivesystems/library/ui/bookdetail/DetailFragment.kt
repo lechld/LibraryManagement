@@ -1,5 +1,6 @@
 package at.aau.iteractivesystems.library.ui.bookdetail
 
+import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import at.aau.interactivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.R
@@ -15,6 +17,7 @@ import at.aau.iteractivesystems.library.databinding.FragmentDetailBinding
 import at.aau.iteractivesystems.library.ui.adapter.ContentAdapter
 import at.aau.iteractivesystems.library.ui.utils.ViewState
 import com.google.android.material.color.MaterialColors
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class DetailFragment : Fragment() {
 
@@ -77,11 +80,13 @@ class DetailFragment : Fragment() {
             }
         }
 
-        binding.recycler.adapter = adapter
+        viewModel.navigateToLogin.observe(viewLifecycleOwner) {
+            val action = DetailFragmentDirections.actionDetailToProfile()
 
-        binding.fab.setOnClickListener {
-            viewModel.toggleBorrowed()
+            findNavController().navigate(action)
         }
+
+        binding.recycler.adapter = adapter
     }
 
     private fun setupFab(binding: FragmentDetailBinding) {
@@ -104,5 +109,32 @@ class DetailFragment : Fragment() {
                 binding.fab.setImageDrawable(addIcon)
             }
         }
+
+        binding.fab.setOnClickListener {
+            showToggleConfirmation(context)
+        }
+    }
+
+    private fun showToggleConfirmation(context: Context) {
+        val isBorrowed = viewModel.borrowed.value ?: return
+
+        val title = if (isBorrowed) {
+            R.string.dialog_return_title
+        } else R.string.dialog_borrow_title
+
+        val message = if (isBorrowed) {
+            R.string.dialog_return_message
+        } else R.string.dialog_borrow_message
+
+        MaterialAlertDialogBuilder(context)
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton(R.string.dialog_yes) { _, _ ->
+                viewModel.toggleBorrowed()
+            }
+            .setNegativeButton(R.string.dialog_no) { _, _ ->
+                // do nothing
+            }
+            .show()
     }
 }
