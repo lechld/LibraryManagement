@@ -19,4 +19,6 @@
     <string name="subject_psychology">Psychology</string>
     <string name="retry">Retry</string>
     <string name="borrow">Borrow</string>
+    <string name="subject_finance">Finance</string>
+    <string name="subject_other">Other</string>
 </resources>

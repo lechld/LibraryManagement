@@ -1,4 +1,4 @@
-package at.aau.interactivesystems.library.api.search
+package at.aau.iteractivesystems.library.api.search
 
 import at.aau.iteractivesystems.library.api.OPEN_LIB_ENDPOINT
 import at.aau.iteractivesystems.library.api.search.SearchApi

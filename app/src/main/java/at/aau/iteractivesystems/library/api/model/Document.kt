@@ -6,6 +6,9 @@ import kotlinx.serialization.SerialName
 @kotlinx.serialization.Serializable
 data class Document(
 
+    @SerialName("key")
+    val id: String,
+
     @SerialName("cover_i")
     val coverId: String? = null,
 
@@ -21,11 +24,11 @@ data class Document(
     @SerialName("first_publish_year")
     val firstPublishYear: String = "",
 
-    @SerialName("key")
-    val key: String = "",
-
     @SerialName("author_key")
-    val authorKey: List<String> = emptyList()
+    val authorKey: List<String> = emptyList(),
+
+    @SerialName("subject")
+    val subject: List<String> = emptyList(),
 ) {
     val coverUrl: String? = if (coverId != null) COVERS_ENDPOINT + "id/$coverId-L.jpg" else null
 }
