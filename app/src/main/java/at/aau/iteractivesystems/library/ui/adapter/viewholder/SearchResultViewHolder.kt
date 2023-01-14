@@ -7,7 +7,14 @@ import com.bumptech.glide.Glide
 
 class SearchResultViewHolder(
     private val binding: ItemSearchResultBinding,
+    private val onClick: (Int) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
+
+    init {
+        binding.root.setOnClickListener {
+            onClick(adapterPosition)
+        }
+    }
 
     fun bind(item: Content.SearchResult) {
         binding.author.text = item.author

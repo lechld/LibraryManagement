@@ -30,7 +30,7 @@ sealed class Content {
             val id: String,
             val imageUrl: String?,
             val title: String,
-        )
+        ): Content()
     }
 
     data class SearchResult(

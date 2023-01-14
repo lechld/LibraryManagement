@@ -10,7 +10,7 @@ import at.aau.iteractivesystems.library.ui.adapter.Content
 private const val SMALL_VIEW_TYPE = 0
 
 class SmallSectionAdapter(
-    private val onClick: (Content.Section.Item) -> Unit
+    private val onClick: ((Content.Section.Item) -> Unit)?,
 ) : ListAdapter<Content.Section.Item, RecyclerView.ViewHolder>(SectionItemDiffUtl()) {
 
     override fun getItemViewType(position: Int): Int {
@@ -22,7 +22,7 @@ class SmallSectionAdapter(
         val binding = ItemSectionSmallBinding.inflate(inflater, parent, false)
 
         return SmallViewHolder(binding) { position ->
-            onClick(getItem(position))
+            onClick?.invoke(getItem(position))
         }
     }
 

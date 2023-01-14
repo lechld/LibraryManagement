@@ -19,11 +19,11 @@ class ViewModelFactory(
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(ExploreViewModel::class.java) -> (ExploreViewModel(
-                recommendationRepository = environment.recommendationRepository,
+                bookRepository = environment.bookRepository,
             )) as T
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> (HomeViewModel()) as T
-            modelClass.isAssignableFrom(SearchDialogViewModel::class.java) -> (SearchDialogViewModel(
-                searchApi = environment.searchApi,
+            modelClass.isAssignableFrom(SearchViewModel::class.java) -> (SearchViewModel(
+                bookRepository = environment.bookRepository,
             )) as T
             modelClass.isAssignableFrom(SearchTextViewModel::class.java) -> (SearchTextViewModel()) as T
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> (LoginViewModel(

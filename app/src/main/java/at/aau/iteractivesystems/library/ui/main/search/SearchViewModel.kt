@@ -4,13 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import at.aau.iteractivesystems.library.api.search.SearchApi
+import at.aau.iteractivesystems.library.repository.books.BookRepository
 import at.aau.iteractivesystems.library.ui.adapter.Content
 import at.aau.iteractivesystems.library.ui.utils.ViewState
 import kotlinx.coroutines.launch
 
-class SearchDialogViewModel(
-    private val searchApi: SearchApi,
+class SearchViewModel(
+    private val bookRepository: BookRepository,
 ) : ViewModel() {
 
     private val _state = MutableLiveData<ViewState<List<Content.SearchResult>>>(ViewState.Loading())
@@ -34,21 +34,18 @@ class SearchDialogViewModel(
 
         viewModelScope.launch {
             try {
-                val searchResult = searchApi.searchByTitle(query)
-                val searchItems = searchResult.docs.mapNotNull { document ->
-                    val id = document.coverId ?: return@mapNotNull null
-                    val author = document.authorName.firstOrNull() ?: return@mapNotNull null
-
+                val foundBooks = bookRepository.search(query)
+                val foundItems = foundBooks.map { book ->
                     Content.SearchResult(
-                        id = id,
-                        imageUrl = document.coverUrl,
-                        title = document.title,
-                        author = author,
-                        publicationYear = document.firstPublishYear
+                        id = book.id,
+                        imageUrl = book.coverUrl,
+                        title = book.title,
+                        author = book.author,
+                        publicationYear = book.publicationYear,
                     )
                 }
 
-                _state.postValue(ViewState.Success(searchItems))
+                _state.postValue(ViewState.Success(foundItems))
 
             } catch (error: Throwable) {
                 _state.postValue(ViewState.Failure(error))

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/explore_nav"
+    app:startDestination="@id/explore">
+
+    <fragment
+        android:id="@+id/explore"
+        android:name="at.aau.iteractivesystems.library.ui.main.explore.ExploreFragment"
+        tools:layout="@layout/fragment_explore">
+
+        <action
+            android:id="@+id/action_explore_to_detail"
+            app:destination="@id/book_detail"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_explore_to_search"
+            app:destination="@id/search"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/search"
+        android:name="at.aau.iteractivesystems.library.ui.main.search.SearchFragment"
+        tools:layout="@layout/fragment_search">
+
+        <argument
+            android:name="query"
+            app:argType="string"
+            app:nullable="false" />
+
+        <action
+            android:id="@+id/action_search_to_detail"
+            app:destination="@id/book_detail"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/book_detail"
+        android:name="at.aau.iteractivesystems.library.ui.bookdetail.DetailFragment"
+        tools:layout="@layout/fragment_detail">
+
+        <argument
+            android:name="bookId"
+            app:argType="string"
+            app:nullable="false" />
+
+        <action
+            android:id="@+id/action_detail_to_profile"
+            app:destination="@+id/profile_nav"
+            app:popUpTo="@id/explore"
+            app:popUpToSaveState="true" />
+
+    </fragment>
+
+</navigation>
