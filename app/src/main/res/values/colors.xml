@@ -62,4 +62,6 @@
     <color name="md_theme_dark_surfaceTint">#D0BCFF</color>
     <color name="md_theme_dark_outlineVariant">#49454F</color>
     <color name="md_theme_dark_scrim">#000000</color>
+    <color name="profile_registration_color">#4EAABE</color>
+    <color name="register_bk_color">#60CCC4</color>
 </resources>

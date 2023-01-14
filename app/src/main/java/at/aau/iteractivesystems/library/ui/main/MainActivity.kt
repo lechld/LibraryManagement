@@ -93,8 +93,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupFloatingAction(binding: ActivityMainBinding) {
-        val addIcon = ResourcesCompat.getDrawable(resources, R.drawable.add, theme)
+        //val addIcon = ResourcesCompat.getDrawable(resources, R.drawable.add, theme)
         val removeIcon = ResourcesCompat.getDrawable(resources, R.drawable.remove, theme)
+        val addIcon = ResourcesCompat.getDrawable(resources, R.drawable.add, theme)
+
         val addColor = MaterialColors.getColor(
             binding.root, com.google.android.material.R.attr.colorPrimaryInverse
         )

@@ -41,7 +41,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun setupUi(binding: FragmentLoginBinding) {
-        binding.registerButton.setOnClickListener {
+        binding.root.setOnClickListener {
             val navController = findNavController()
             val navAction = LoginFragmentDirections.actionLoginToRegister()
 
