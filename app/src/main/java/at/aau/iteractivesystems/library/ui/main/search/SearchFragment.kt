@@ -1,51 +1,47 @@
 package at.aau.iteractivesystems.library.ui.main.search
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
-import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import at.aau.interactivesystems.library.EnvironmentImpl
-import at.aau.iteractivesystems.library.R
 import at.aau.iteractivesystems.library.ViewModelFactory
-import at.aau.iteractivesystems.library.databinding.DialogFragmentSeachBinding
+import at.aau.iteractivesystems.library.databinding.FragmentSearchBinding
 import at.aau.iteractivesystems.library.ui.adapter.Content
 import at.aau.iteractivesystems.library.ui.adapter.ContentAdapter
 import at.aau.iteractivesystems.library.ui.utils.ViewState
 
-private const val SEARCH_DIALOG_TAG = "SEARCH_DIALOG_TAG"
+class SearchFragment : Fragment() {
 
-class SearchDialogFragment : DialogFragment() {
+    private var binding: FragmentSearchBinding? = null
 
-    private var binding: DialogFragmentSeachBinding? = null
+    private val navArgs by navArgs<SearchFragmentArgs>()
+
+    private val query by lazy {
+        navArgs.query
+    }
 
     private val viewModel by lazy {
         ViewModelProvider(
             this, ViewModelFactory(EnvironmentImpl)
-        )[SearchDialogViewModel::class.java]
-    }
-
-    private val searchTextViewModel by lazy {
-        ViewModelProvider(
-            // note: owner is activity to allow sharing of search text
-            requireActivity(), ViewModelFactory(EnvironmentImpl)
-        )[SearchTextViewModel::class.java]
+        )[SearchViewModel::class.java]
     }
 
     private val adapter by lazy {
-        ContentAdapter {
-            // ignore section click, need better separation here.
-        }
-    }
+        ContentAdapter { clickedSectionItem ->
+            if (clickedSectionItem is Content.SearchResult) {
+                val navController = findNavController()
+                val action = SearchFragmentDirections.actionSearchToDetail(clickedSectionItem.id)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setStyle(STYLE_NO_TITLE, R.style.AppTheme_Dialog_Fullscreen)
+                navController.navigate(action)
+            }
+        }
     }
 
     override fun onCreateView(
@@ -53,7 +49,7 @@ class SearchDialogFragment : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = DialogFragmentSeachBinding.inflate(inflater, container, false)
+        val binding = FragmentSearchBinding.inflate(inflater, container, false)
         this.binding = binding
 
         return binding.root
@@ -70,17 +66,10 @@ class SearchDialogFragment : DialogFragment() {
         super.onDestroyView()
     }
 
-    override fun onDismiss(dialog: DialogInterface) {
-        searchTextViewModel.setQuery(null) // reset query when closing dialog, this also clears search in MainActivity
-        super.onDismiss(dialog)
-    }
-
-    private fun setupUi(binding: DialogFragmentSeachBinding) {
+    private fun setupUi(binding: FragmentSearchBinding) {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                searchTextViewModel.setQuery(query)
                 viewModel.submitQuery(query)
-
                 return false
             }
 
@@ -88,10 +77,6 @@ class SearchDialogFragment : DialogFragment() {
                 return false
             }
         })
-
-        searchTextViewModel.query.observe(viewLifecycleOwner) { query ->
-            binding.searchView.setQuery(query, false)
-        }
 
         viewModel.state.observe(viewLifecycleOwner) { state ->
             when (state) {
@@ -108,14 +93,7 @@ class SearchDialogFragment : DialogFragment() {
             }
         }
 
-        viewModel.submitQuery(searchTextViewModel.query.value)
-
+        binding.searchView.setQuery(query, true)
         binding.recycler.adapter = adapter
-    }
-
-    companion object {
-        fun show(fragmentManager: FragmentManager) {
-            SearchDialogFragment().show(fragmentManager, SEARCH_DIALOG_TAG)
-        }
     }
 }

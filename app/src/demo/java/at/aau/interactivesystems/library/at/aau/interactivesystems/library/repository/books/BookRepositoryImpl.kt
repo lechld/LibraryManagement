@@ -5,7 +5,10 @@ import at.aau.iteractivesystems.library.model.Recommendation
 import at.aau.iteractivesystems.library.model.Subject
 import at.aau.iteractivesystems.library.repository.books.BookRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
+
+private const val MOCK_LOADING_DELAY = 2000L
 
 class BookRepositoryImpl : BookRepository {
 
@@ -16,6 +19,8 @@ class BookRepositoryImpl : BookRepository {
     }
 
     override suspend fun getRecommendations(): List<Recommendation> = withContext(Dispatchers.IO) {
+        delay(MOCK_LOADING_DELAY)
+
         return@withContext Subject.values().map { subject ->
             val books = mutableListOf<Book>()
 
@@ -39,6 +44,8 @@ class BookRepositoryImpl : BookRepository {
     }
 
     override suspend fun search(query: String): List<Book> = withContext(Dispatchers.IO) {
+        delay(MOCK_LOADING_DELAY)
+
         val books = mutableListOf<Book>()
 
         repeat(15) { counter ->
