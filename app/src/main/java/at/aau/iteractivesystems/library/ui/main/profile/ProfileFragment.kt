@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import at.aau.interactivesystems.library.EnvironmentImpl
+import at.aau.iteractivesystems.library.R
 import at.aau.iteractivesystems.library.ViewModelFactory
 import at.aau.iteractivesystems.library.databinding.FragmentProfileBinding
 
@@ -32,7 +33,7 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.let { setupUi(binding) }
+        binding?.let { setupUi(it) }
     }
 
     override fun onDestroyView() {
@@ -41,7 +42,17 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setupUi(binding: FragmentProfileBinding) {
-        binding.loginButton.setOnClickListener {
+        viewModel.isLoggedIn.observe(viewLifecycleOwner) { loggedIn ->
+            if (!loggedIn) {
+                val navAction = ProfileFragmentDirections.actionProfileToLogin()
+
+                findNavController().navigate(R.id.login)
+            }
+        }
+
+        binding.logoutButton.setOnClickListener {
+            viewModel.logout()
+
             val navController = findNavController()
             val navAction = ProfileFragmentDirections.actionProfileToLogin()
 

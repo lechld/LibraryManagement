@@ -26,9 +26,15 @@ class ViewModelFactory(
                 searchApi = environment.searchApi,
             )) as T
             modelClass.isAssignableFrom(SearchTextViewModel::class.java) -> (SearchTextViewModel()) as T
-            modelClass.isAssignableFrom(LoginViewModel::class.java) -> (LoginViewModel()) as T
-            modelClass.isAssignableFrom(ProfileViewModel::class.java) -> (ProfileViewModel()) as T
-            modelClass.isAssignableFrom(RegisterViewModel::class.java) -> (RegisterViewModel()) as T
+            modelClass.isAssignableFrom(LoginViewModel::class.java) -> (LoginViewModel(
+                userRepository = environment.userRepository,
+            )) as T
+            modelClass.isAssignableFrom(ProfileViewModel::class.java) -> (ProfileViewModel(
+                userRepository = environment.userRepository,
+            )) as T
+            modelClass.isAssignableFrom(RegisterViewModel::class.java) -> (RegisterViewModel(
+                userRepository = environment.userRepository,
+            )) as T
             modelClass.isAssignableFrom(FloatingActionViewModel::class.java) -> (FloatingActionViewModel()) as T
             else -> throw IllegalArgumentException("Unknown ViewModel class. Maybe forgot to register it in ViewModelFactory?")
         }

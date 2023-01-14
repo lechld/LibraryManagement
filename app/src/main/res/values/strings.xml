@@ -19,4 +19,14 @@
     <string name="subject_psychology">Psychology</string>
     <string name="retry">Retry</string>
     <string name="borrow">Borrow</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="new_user_register_now">New user? Register Now</string>
+    <string name="e_mail">E-Mail</string>
+    <string name="already_nhave_an_naccount">Already \nhave an\nAccount?</string>
+    <string name="here_s_nyour_first_nstep">Here\'s\nyour first\nstep!</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
+    <string name="register">Register</string>
+    <string name="invalid_login_data">Your input is invalid.</string>
 </resources>

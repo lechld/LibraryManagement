@@ -2,7 +2,6 @@ package at.aau.iteractivesystems.library.repository.user
 
 import at.aau.iteractivesystems.library.model.User
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
 class UserRepositoryImpl : UserRepository {
@@ -17,13 +16,23 @@ class UserRepositoryImpl : UserRepository {
      */
     private var user: User? = null
 
-    override suspend fun getUser(): User? = withContext(Dispatchers.IO) {
-        delay(500L) // fake loading takes some time as user is stored in some file or db.
+    private val observers = mutableListOf<UserRepository.Observer>()
 
+    override suspend fun getUser(): User? = withContext(Dispatchers.IO) {
         user
     }
 
     override suspend fun setUser(user: User?) {
         this.user = user
+
+        observers.forEach { it.userHasChanged(user) }
+    }
+
+    override fun addObserver(observer: UserRepository.Observer) {
+        observers.add(observer)
+    }
+
+    override fun removeObserver(observer: UserRepository.Observer) {
+        observers.remove(observer)
     }
 }

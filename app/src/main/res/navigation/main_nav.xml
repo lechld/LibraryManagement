@@ -58,7 +58,18 @@
     <fragment
         android:id="@+id/register"
         android:name="at.aau.iteractivesystems.library.ui.main.profile.register.RegisterFragment"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register">
+
+        <action
+            android:id="@+id/action_register_to_profile"
+            app:destination="@id/profile"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/profile" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/book_detail"

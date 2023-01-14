@@ -9,3 +9,5 @@ data class User(
     val birthday: LocalDate,
     val gender: Gender,
 )
+
+val DUMMY_USER = User("userId", "John", "Doe", LocalDate.of(1990, 12, 20), Gender.MALE)

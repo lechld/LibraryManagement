@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import at.aau.interactivesystems.library.EnvironmentImpl
+import at.aau.iteractivesystems.library.R
 import at.aau.iteractivesystems.library.ViewModelFactory
 import at.aau.iteractivesystems.library.databinding.FragmentRegisterBinding
 
@@ -40,6 +42,10 @@ class RegisterFragment : Fragment() {
     }
 
     private fun setupUi(binding: FragmentRegisterBinding) {
-        // TODO
+        binding.registerButton.setOnClickListener {
+            viewModel.register()
+
+            findNavController().popBackStack(R.id.profile, false)
+        }
     }
 }

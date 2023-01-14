@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text_profile"
-        style="@style/AppTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Already \nhave an\nAccount?"
+        android:layout_marginStart="@dimen/defaultSpacing"
+        android:layout_marginTop="@dimen/defaultSpacing"
+        android:text="@string/already_nhave_an_naccount"
         android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/image_profile"
@@ -22,48 +22,56 @@
         android:id="@+id/image_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/defaultSpacing"
+        android:layout_marginEnd="@dimen/defaultSpacing"
         android:src="@drawable/ic_register_hero"
+        android:tint="?attr/colorPrimaryInverse"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/text_profile"
         app:layout_constraintStart_toEndOf="@id/text_profile"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textinput_mail"
-        android:layout_marginTop="@dimen/defaultSpacing"
-        android:layout_marginLeft="@dimen/defaultSpacing"
-        android:layout_marginRight="@dimen/defaultSpacing"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="E-Mail"
+        android:layout_marginLeft="@dimen/defaultSpacing"
+        android:layout_marginTop="@dimen/defaultSpacing"
+        android:layout_marginRight="@dimen/defaultSpacing"
+        android:hint="@string/e_mail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/image_profile"
         app:startIconDrawable="@drawable/ic_baseline_mail_24">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        />
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLines="1" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textinput_password"
-        android:layout_marginLeft="@dimen/defaultSpacing"
-        android:layout_marginRight="@dimen/defaultSpacing"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:layout_marginLeft="@dimen/defaultSpacing"
+        android:layout_marginRight="@dimen/defaultSpacing"
+        android:hint="@string/password"
+        android:maxLines="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textinput_mail"
         app:startIconDrawable="@drawable/ic_baseline_password_24">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"/>
-        />
+            android:inputType="textPassword"
+            android:maxLines="1" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
@@ -71,19 +79,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/bigSpacing"
-        android:backgroundTint="@color/profile_registration_color"
-        android:text="Login"
+        android:backgroundTint="?attr/colorPrimary"
+        android:text="@string/login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textinput_password"/>
+        app:layout_constraintTop_toBottomOf="@id/textinput_password" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textview_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onLoginClick"
-        android:text="New user? Register Now"
-        android:textColor="@color/profile_registration_color"
+        android:padding="@dimen/defaultSpacing"
+        android:text="@string/new_user_register_now"
+        android:textColor="?attr/colorPrimary"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
