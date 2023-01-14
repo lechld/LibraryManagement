@@ -5,14 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import at.aau.iteractivesystems.library.R
-import at.aau.iteractivesystems.library.repository.books.RecommendationRepository
+import at.aau.iteractivesystems.library.repository.books.BookRepository
 import at.aau.iteractivesystems.library.ui.adapter.Content
 import at.aau.iteractivesystems.library.ui.utils.AndroidString
 import at.aau.iteractivesystems.library.ui.utils.ViewState
 import kotlinx.coroutines.launch
 
 class ExploreViewModel(
-    private val recommendationRepository: RecommendationRepository,
+    private val bookRepository: BookRepository,
 ) : ViewModel() {
 
     private val _state: MutableLiveData<ViewState<List<Content>>> =
@@ -42,13 +42,13 @@ class ExploreViewModel(
     }
 
     private suspend fun getSuggestedSection(): List<Content> {
-        val recommendations = recommendationRepository.getRecommendations()
+        val recommendations = bookRepository.getRecommendations()
         val content = mutableListOf<Content>()
 
         content.add(Content.Headline(AndroidString.Resource(R.string.discover_content_header)))
 
         recommendations.forEach { recommendation ->
-            val items = recommendation.items.map { recommendationItem ->
+            val items = recommendation.books.map { recommendationItem ->
                 Content.Section.Item(
                     id = recommendationItem.id,
                     imageUrl = recommendationItem.coverUrl,
