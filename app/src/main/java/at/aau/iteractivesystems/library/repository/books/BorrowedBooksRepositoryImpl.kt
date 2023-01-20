@@ -16,11 +16,7 @@ class BorrowedBooksRepositoryImpl : BorrowedBooksRepository {
         return bookIds.contains(bookId)
     }
 
-    override fun get(int: Int): String {
-        return bookIds.elementAt(int)
-    }
-
-    override fun size(): Int {
-        return bookIds.size
+    override fun getAll(): Set<String> {
+        return bookIds
     }
 }

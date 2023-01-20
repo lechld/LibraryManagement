@@ -1,12 +1,13 @@
 package at.aau.iteractivesystems.library.ui.main.home
 
-import androidx.lifecycle.*
-import at.aau.iteractivesystems.library.Environment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import at.aau.iteractivesystems.library.repository.books.BookRepository
 import at.aau.iteractivesystems.library.repository.books.BorrowedBooksRepository
 import at.aau.iteractivesystems.library.repository.user.UserRepository
 import at.aau.iteractivesystems.library.ui.adapter.Content
-import at.aau.iteractivesystems.library.ui.bookdetail.DetailViewModel
 import at.aau.iteractivesystems.library.ui.utils.SingleLiveEvent
 import at.aau.iteractivesystems.library.ui.utils.ViewState
 import kotlinx.coroutines.launch
@@ -30,28 +31,28 @@ class HomeViewModel(
         setupContent()
     }
 
-    private fun setupContent(){
+    private fun setupContent() {
         viewModelScope.launch {
             if (userRepository.getUser() == null) {
                 _navigateToLogin.postValue(Unit)
-                return@launch
             }
 
             val content = mutableListOf<Content>()
+            val borrowedBookIds = borrowedBooksRepository.getAll()
 
-            for(i in (borrowedBooksRepository.size()-1) downTo 0 step 1){
-                val book = bookRepository.getBook(borrowedBooksRepository.get(i))
-                content.add(
-                    Content.SearchResult(
-                        book!!.id,
-                        book!!.coverUrl,
-                        book!!.title,
-                        book!!.author,
-                        book!!.publicationYear
-                    )
+            val contentItems = borrowedBookIds.mapNotNull { bookId ->
+                val book = bookRepository.getBook(bookId) ?: return@mapNotNull null
+
+                Content.SearchResult(
+                    book.id,
+                    book.coverUrl,
+                    book.title,
+                    book.author,
+                    book.publicationYear
                 )
             }
 
+            content.addAll(contentItems)
             content.add(
                 Content.Home(placeholder = null)
             )
