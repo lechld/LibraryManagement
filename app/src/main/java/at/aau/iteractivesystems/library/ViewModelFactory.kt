@@ -19,7 +19,10 @@ class ViewModelFactory(
             modelClass.isAssignableFrom(ExploreViewModel::class.java) -> (ExploreViewModel(
                 bookRepository = environment.bookRepository,
             )) as T
-            modelClass.isAssignableFrom(HomeViewModel::class.java) -> (HomeViewModel()) as T
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> (HomeViewModel(
+                bookRepository = environment.bookRepository,
+                borrowedBooksRepository = environment.borrowedBooksRepository,
+            )) as T
             modelClass.isAssignableFrom(SearchViewModel::class.java) -> (SearchViewModel(
                 bookRepository = environment.bookRepository,
             )) as T

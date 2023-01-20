@@ -19,7 +19,8 @@ object DocumentBookMapper {
             author = authorName,
             coverUrl = coverUrl,
             subject = subject,
-            publicationYear = document.firstPublishYear
+            publicationYear = document.firstPublishYear,
+            description = document.description
         )
     }
 }

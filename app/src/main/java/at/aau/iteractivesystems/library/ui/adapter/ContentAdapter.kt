@@ -4,20 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import at.aau.iteractivesystems.library.databinding.ItemHeadlineBinding
-import at.aau.iteractivesystems.library.databinding.ItemHeadlineSmallBinding
-import at.aau.iteractivesystems.library.databinding.ItemSearchResultBinding
-import at.aau.iteractivesystems.library.databinding.ItemSectionBinding
+import at.aau.iteractivesystems.library.databinding.*
 import at.aau.iteractivesystems.library.ui.adapter.staterestoration.NestedRecyclerViewStateRecoverAdapter
-import at.aau.iteractivesystems.library.ui.adapter.viewholder.HeadlineSmallViewHolder
-import at.aau.iteractivesystems.library.ui.adapter.viewholder.HeadlineViewHolder
-import at.aau.iteractivesystems.library.ui.adapter.viewholder.SearchResultViewHolder
-import at.aau.iteractivesystems.library.ui.adapter.viewholder.SectionViewHolder
+import at.aau.iteractivesystems.library.ui.adapter.viewholder.*
 
 private const val HEADLINE_VIEW_TYPE = 0
 private const val HEADLINE_SMALL_VIEW_TYPE = 1
 private const val SECTION_VIEW_TYPE = 2
 private const val SEARCH_ITEM_VIEW_TYPE = 3
+private const val DETAIL_VIEW_TYPE = 4
 
 class ContentAdapter(
     private val onItemClick: ((Content) -> Unit)? = null,
@@ -29,6 +24,7 @@ class ContentAdapter(
             is Content.HeadlineSmall -> HEADLINE_SMALL_VIEW_TYPE
             is Content.Section -> SECTION_VIEW_TYPE
             is Content.SearchResult -> SEARCH_ITEM_VIEW_TYPE
+            is Content.Detail -> DETAIL_VIEW_TYPE
             else -> throw IllegalStateException("Invalid ViewHolder type!")
         }
     }
@@ -59,6 +55,11 @@ class ContentAdapter(
                     onItemClick?.invoke(getItem(position))
                 }
             }
+            DETAIL_VIEW_TYPE -> {
+                val binding = ItemDetailHeaderBinding.inflate(inflater, parent, false)
+
+                DetailViewHolder(binding)
+            }
             else -> throw IllegalStateException("Invalid viewType!")
         }
     }
@@ -78,6 +79,9 @@ class ContentAdapter(
             }
             is SearchResultViewHolder -> {
                 holder.bind(item as Content.SearchResult)
+            }
+            is DetailViewHolder -> {
+                holder.bind(item as Content.Detail)
             }
             else -> throw IllegalStateException("Can't bind type!")
         }
@@ -100,6 +104,9 @@ class ContentAdapter(
                 return oldItem.id == newItem.id
             }
             if (oldItem is Content.SearchResult && newItem is Content.SearchResult) {
+                return oldItem.id == newItem.id
+            }
+            if (oldItem is Content.Detail && newItem is Content.Detail) {
                 return oldItem.id == newItem.id
             }
 
