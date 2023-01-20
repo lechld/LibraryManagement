@@ -29,6 +29,9 @@ data class Document(
 
     @SerialName("subject")
     val subject: List<String> = emptyList(),
+
+    @SerialName("description")
+    val description: String = ""
 ) {
     val coverUrl: String? = if (coverId != null) COVERS_ENDPOINT + "id/$coverId-L.jpg" else null
 }

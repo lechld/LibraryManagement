@@ -8,6 +8,27 @@
     <fragment
         android:id="@+id/home"
         android:name="at.aau.iteractivesystems.library.ui.main.home.HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+
+    <action
+        android:id="@+id/action_home_to_profile"
+        app:destination="@+id/profile_nav"
+        app:enterAnim="@android:anim/slide_in_left"
+        app:exitAnim="@android:anim/slide_out_right"
+        app:popEnterAnim="@android:anim/slide_in_left"
+        app:popExitAnim="@android:anim/slide_out_right"
+         />
+
+        <action
+            android:id="@+id/action_home_to_detail"
+            app:destination="@+id/book_detail"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+
+             />
+
+    </fragment>
 
 </navigation>

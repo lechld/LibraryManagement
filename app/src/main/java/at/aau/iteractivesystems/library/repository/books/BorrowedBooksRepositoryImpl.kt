@@ -15,4 +15,12 @@ class BorrowedBooksRepositoryImpl : BorrowedBooksRepository {
     override fun contains(bookId: String): Boolean {
         return bookIds.contains(bookId)
     }
+
+    override fun get(int: Int): String {
+        return bookIds.elementAt(int)
+    }
+
+    override fun size(): Int {
+        return bookIds.size
+    }
 }

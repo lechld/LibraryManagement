@@ -4,4 +4,6 @@ interface BorrowedBooksRepository {
     fun add(bookId: String)
     fun remove(bookId: String)
     fun contains(bookId: String): Boolean
+    fun get(int: Int): String
+    fun size(): Int
 }

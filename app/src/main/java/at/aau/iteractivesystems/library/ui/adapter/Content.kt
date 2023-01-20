@@ -40,4 +40,16 @@ sealed class Content {
         val author: String,
         val publicationYear: String
     ) : Content()
+
+    data class Detail(
+        val id: String,
+        val imageUrl: String?,
+        val title: String,
+        val author: String,
+        val publicationYear: String,
+    ) : Content()
+
+    data class Home(
+        val placeholder: String?,
+    ) : Content()
 }

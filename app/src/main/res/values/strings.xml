@@ -10,6 +10,7 @@
     <string name="default_error_message">Something went wrong. Please try again or contact our support. </string>
     <string name="connection_error_message">Your internet connection seems to be down. Please ensure your device is connected and try again.</string>
     <string name="default_loading_message">We are fetching your data out of million books. Be calm, it\'s ready soon 😊.</string>
+    <string name="no_books_borrowed_message">We can\'t find any more borrowed books.\n Head over to explore to find more books to your liking.</string>
     <string name="subject_romance">Romance</string>
     <string name="subject_thriller">Thriller</string>
     <string name="subject_kids">Kids</string>
