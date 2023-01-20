@@ -10,10 +10,6 @@ class DetailViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(Detail : Content.Detail){
-        binding.textBookTitle.text = Detail.title
-        binding.textBookAuthor.text = Detail.author
-        binding.textBookYear.text = Detail.publicationYear
-
         Glide.with(binding.root.context)
             .load(Detail.imageUrl)
             .into(binding.image)

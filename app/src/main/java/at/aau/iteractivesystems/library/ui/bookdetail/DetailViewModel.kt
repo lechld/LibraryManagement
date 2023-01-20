@@ -62,7 +62,14 @@ class DetailViewModel(
             }
 
             val items = listOf(
-                Content.Detail(book.id, book.coverUrl,book.title, "by "+book.author, "published "+book.publicationYear),
+                Content.Detail(book.id, book.coverUrl),
+                Content.HeadlineSmall(AndroidString.Text(book.title)) ,
+                Content.HeadlineSmall(AndroidString.Text("")),
+                Content.HeadlineSmall(AndroidString.Text("by "+book.author)),
+                Content.HeadlineSmall(AndroidString.Text("")),
+                Content.HeadlineSmall(AndroidString.Text("from: "+book.publicationYear)),
+                Content.HeadlineSmall(AndroidString.Text("")),
+                //TODO Delete "Description" once it actually works
                 Content.HeadlineSmall(AndroidString.Text("Description: "+book.description))
             )
 
