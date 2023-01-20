@@ -13,6 +13,25 @@
         android:orientation="vertical"
         android:paddingVertical="@dimen/defaultSpacing"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_search_result"/>
+        tools:listitem="@layout/item_search_result" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/reading_book" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/defaultSpacing"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="5"
+        android:text="@string/no_books_borrowed_message"
+        android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

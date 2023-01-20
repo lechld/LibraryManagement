@@ -10,14 +10,13 @@
         android:name="at.aau.iteractivesystems.library.ui.main.home.HomeFragment"
         tools:layout="@layout/fragment_home">
 
-    <action
-        android:id="@+id/action_home_to_profile"
-        app:destination="@+id/profile_nav"
-        app:enterAnim="@android:anim/slide_in_left"
-        app:exitAnim="@android:anim/slide_out_right"
-        app:popEnterAnim="@android:anim/slide_in_left"
-        app:popExitAnim="@android:anim/slide_out_right"
-         />
+        <action
+            android:id="@+id/action_home_to_profile"
+            app:destination="@+id/profile_nav"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
 
         <action
             android:id="@+id/action_home_to_detail"
@@ -25,9 +24,25 @@
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right"
+            app:popExitAnim="@android:anim/slide_out_right" />
 
-             />
+    </fragment>
+
+    <fragment
+        android:id="@+id/book_detail"
+        android:name="at.aau.iteractivesystems.library.ui.bookdetail.DetailFragment"
+        tools:layout="@layout/fragment_detail">
+
+        <argument
+            android:name="bookId"
+            app:argType="string"
+            app:nullable="false" />
+
+        <action
+            android:id="@+id/action_detail_to_profile"
+            app:destination="@+id/profile_nav"
+            app:popUpTo="@id/explore"
+            app:popUpToSaveState="true" />
 
     </fragment>
 

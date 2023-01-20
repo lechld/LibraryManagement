@@ -4,22 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import at.aau.iteractivesystems.library.databinding.ItemDetailHeaderBinding
-import at.aau.iteractivesystems.library.databinding.ItemHeadlineBinding
-import at.aau.iteractivesystems.library.databinding.ItemHeadlineSmallBinding
-import at.aau.iteractivesystems.library.databinding.ItemHomeBaselineBinding
-import at.aau.iteractivesystems.library.databinding.ItemSearchResultBinding
-import at.aau.iteractivesystems.library.databinding.ItemSectionBinding
+import at.aau.iteractivesystems.library.databinding.*
 import at.aau.iteractivesystems.library.ui.adapter.staterestoration.NestedRecyclerViewStateRecoverAdapter
 import at.aau.iteractivesystems.library.ui.adapter.viewholder.*
-import at.aau.iteractivesystems.library.ui.adapter.viewholder.HomeViewHolder
 
 private const val HEADLINE_VIEW_TYPE = 0
 private const val HEADLINE_SMALL_VIEW_TYPE = 1
 private const val SECTION_VIEW_TYPE = 2
 private const val SEARCH_ITEM_VIEW_TYPE = 3
 private const val DETAIL_VIEW_TYPE = 4
-private const val HOME_VIEW_TYPE = 5
 
 class ContentAdapter(
     private val onItemClick: ((Content) -> Unit)? = null,
@@ -32,7 +25,6 @@ class ContentAdapter(
             is Content.Section -> SECTION_VIEW_TYPE
             is Content.SearchResult -> SEARCH_ITEM_VIEW_TYPE
             is Content.Detail -> DETAIL_VIEW_TYPE
-            is Content.Home -> HOME_VIEW_TYPE
             else -> throw IllegalStateException("Invalid ViewHolder type!")
         }
     }
@@ -68,11 +60,6 @@ class ContentAdapter(
 
                 DetailViewHolder(binding)
             }
-            HOME_VIEW_TYPE -> {
-                val binding = ItemHomeBaselineBinding.inflate(inflater, parent, false)
-
-                HomeViewHolder(binding)
-            }
             else -> throw IllegalStateException("Invalid viewType!")
         }
     }
@@ -95,9 +82,6 @@ class ContentAdapter(
             }
             is DetailViewHolder -> {
                 holder.bind(item as Content.Detail)
-            }
-            is HomeViewHolder -> {
-                holder.bind(item as Content.Home)
             }
             else -> throw IllegalStateException("Can't bind type!")
         }
@@ -122,11 +106,8 @@ class ContentAdapter(
             if (oldItem is Content.SearchResult && newItem is Content.SearchResult) {
                 return oldItem.id == newItem.id
             }
-            if (oldItem is Content.Detail && newItem is Content.Detail){
+            if (oldItem is Content.Detail && newItem is Content.Detail) {
                 return oldItem.id == newItem.id
-            }
-            if (oldItem is Content.Home && newItem is Content.Home){
-                return true
             }
 
             return false

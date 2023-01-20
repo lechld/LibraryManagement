@@ -4,43 +4,43 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import at.aau.iteractivesystems.library.R
 import at.aau.iteractivesystems.library.repository.books.BookRepository
 import at.aau.iteractivesystems.library.repository.books.BorrowedBooksRepository
-import at.aau.iteractivesystems.library.repository.user.UserRepository
 import at.aau.iteractivesystems.library.ui.adapter.Content
-import at.aau.iteractivesystems.library.ui.utils.SingleLiveEvent
+import at.aau.iteractivesystems.library.ui.utils.AndroidString
 import at.aau.iteractivesystems.library.ui.utils.ViewState
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val bookRepository: BookRepository,
     private val borrowedBooksRepository: BorrowedBooksRepository,
-    private val userRepository: UserRepository,
-) : ViewModel() {
+) : ViewModel(), BorrowedBooksRepository.Observer {
 
     private val _state: MutableLiveData<ViewState<List<Content>>> =
         MutableLiveData(ViewState.Loading())
     val state: LiveData<ViewState<List<Content>>>
         get() = _state
 
-    private val _navigateToLogin = SingleLiveEvent<Unit>()
-    val navigateToLogin: LiveData<Unit>
-        get() = _navigateToLogin
-
     init {
+        borrowedBooksRepository.addObserver(this)
+        setupContent()
+    }
+
+    override fun onCleared() {
+        borrowedBooksRepository.removeObserver(this)
+        super.onCleared()
+    }
+
+    override fun borrowedStateChanged() {
         setupContent()
     }
 
     private fun setupContent() {
         viewModelScope.launch {
-            if (userRepository.getUser() == null) {
-                _navigateToLogin.postValue(Unit)
-            }
-
             val content = mutableListOf<Content>()
             val borrowedBookIds = borrowedBooksRepository.getAll()
-
-            val contentItems = borrowedBookIds.mapNotNull { bookId ->
+            val borrowedContent = borrowedBookIds.mapNotNull { bookId ->
                 val book = bookRepository.getBook(bookId) ?: return@mapNotNull null
 
                 Content.SearchResult(
@@ -52,10 +52,11 @@ class HomeViewModel(
                 )
             }
 
-            content.addAll(contentItems)
-            content.add(
-                Content.Home(placeholder = null)
-            )
+            if (borrowedContent.isNotEmpty()) {
+                content.add(Content.Headline(AndroidString.Resource(R.string.home_header)))
+                content.addAll(borrowedContent)
+            }
+
             _state.postValue(ViewState.Success(content))
         }
     }

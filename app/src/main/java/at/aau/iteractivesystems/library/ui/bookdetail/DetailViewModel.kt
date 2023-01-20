@@ -16,7 +16,7 @@ class DetailViewModel(
     private val bookRepository: BookRepository,
     private val borrowedBooksRepository: BorrowedBooksRepository,
     private val userRepository: UserRepository,
-) : ViewModel() {
+) : ViewModel(), BorrowedBooksRepository.Observer {
 
     private val _state: MutableLiveData<ViewState<List<Content>>> =
         MutableLiveData(ViewState.Loading())
@@ -32,7 +32,19 @@ class DetailViewModel(
         get() = _navigateToLogin
 
     init {
+        borrowedBooksRepository.addObserver(this)
         setupContent()
+    }
+
+    override fun onCleared() {
+        borrowedBooksRepository.removeObserver(this)
+        super.onCleared()
+    }
+
+    override fun borrowedStateChanged() {
+        viewModelScope.launch {
+            _borrowed.postValue(borrowedBooksRepository.contains(bookId))
+        }
     }
 
     fun toggleBorrowed() {
@@ -44,10 +56,8 @@ class DetailViewModel(
 
             if (borrowedBooksRepository.contains(bookId)) {
                 borrowedBooksRepository.remove(bookId)
-                _borrowed.postValue(false)
             } else {
                 borrowedBooksRepository.add(bookId)
-                _borrowed.postValue(true)
             }
         }
     }
@@ -63,14 +73,14 @@ class DetailViewModel(
 
             val items = listOf(
                 Content.Detail(book.id, book.coverUrl),
-                Content.HeadlineSmall(AndroidString.Text(book.title)) ,
+                Content.HeadlineSmall(AndroidString.Text(book.title)),
                 Content.HeadlineSmall(AndroidString.Text("")),
-                Content.HeadlineSmall(AndroidString.Text("by "+book.author)),
+                Content.HeadlineSmall(AndroidString.Text("by " + book.author)),
                 Content.HeadlineSmall(AndroidString.Text("")),
-                Content.HeadlineSmall(AndroidString.Text("from: "+book.publicationYear)),
+                Content.HeadlineSmall(AndroidString.Text("from: " + book.publicationYear)),
                 Content.HeadlineSmall(AndroidString.Text("")),
                 //TODO Delete "Description" once it actually works
-                Content.HeadlineSmall(AndroidString.Text("Description: "+book.description))
+                Content.HeadlineSmall(AndroidString.Text("Description: " + book.description))
             )
 
             _state.postValue(ViewState.Success(items))

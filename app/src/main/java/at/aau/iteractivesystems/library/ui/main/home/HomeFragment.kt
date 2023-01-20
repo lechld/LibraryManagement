@@ -8,16 +8,11 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import at.aau.interactivesystems.library.EnvironmentImpl
 import at.aau.iteractivesystems.library.ViewModelFactory
-import at.aau.iteractivesystems.library.databinding.FragmentDetailBinding
 import at.aau.iteractivesystems.library.databinding.FragmentHomeBinding
 import at.aau.iteractivesystems.library.ui.adapter.Content
 import at.aau.iteractivesystems.library.ui.adapter.ContentAdapter
-import at.aau.iteractivesystems.library.ui.bookdetail.DetailFragmentArgs
-import at.aau.iteractivesystems.library.ui.bookdetail.DetailFragmentDirections
-import at.aau.iteractivesystems.library.ui.main.search.SearchFragmentDirections
 import at.aau.iteractivesystems.library.ui.utils.ViewState
 
 class HomeFragment : Fragment() {
@@ -28,10 +23,7 @@ class HomeFragment : Fragment() {
         ContentAdapter { clickedSectionItem ->
             if (clickedSectionItem is Content.SearchResult) {
                 val navController = findNavController()
-                val action = HomeFragmentDirections.actionHomeToDetail(
-                    //clickedSectionItem.id
-                    //TODO: Why does it not take input here?
-                )
+                val action = HomeFragmentDirections.actionHomeToDetail(clickedSectionItem.id)
 
                 navController.navigate(action)
             }
@@ -79,18 +71,14 @@ class HomeFragment : Fragment() {
                     // TODO
                 }
                 is ViewState.Success -> {
+                    val hasItems = state.data?.isNotEmpty() ?: false
+
+                    binding.text.isVisible = !hasItems
+                    binding.animation.isVisible = !hasItems
                     adapter.submitList(state.data)
                 }
             }
         }
-
-        //You could navigate to Login if not logged in - but not necessary
-
-        //viewModel.navigateToLogin.observe(viewLifecycleOwner) {
-        //    val action = HomeFragmentDirections.actionHomeToProfile()
-
-        //    findNavController().navigate(action)
-        //}
 
         binding.recycler.adapter = adapter
     }
