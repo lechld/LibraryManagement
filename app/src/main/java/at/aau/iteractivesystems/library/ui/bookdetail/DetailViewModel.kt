@@ -79,8 +79,17 @@ class DetailViewModel(
                 Content.HeadlineSmall(AndroidString.Text("")),
                 Content.HeadlineSmall(AndroidString.Text("from: " + book.publicationYear)),
                 Content.HeadlineSmall(AndroidString.Text("")),
-                //TODO Delete "Description" once it actually works
-                Content.HeadlineSmall(AndroidString.Text("Description: " + book.description))
+
+                // TODO: Fix API to receive proper description
+                //Content.HeadlineSmall(AndroidString.Text("Description: " + book.description))
+
+                Content.HeadlineSmall(
+                    AndroidString.Text(
+                        "Description" + System.lineSeparator() + "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac cursus mi. Proin ut nisl vitae nisl consectetur interdum vitae sit amet urna. Curabitur non porta felis. Phasellus sodales consectetur erat, vitae commodo sapien. Suspendisse ante lectus, iaculis vel consequat et, vulputate eu elit. Etiam faucibus ante sed pellentesque imperdiet. Phasellus ac enim sapien. Fusce mattis feugiat rutrum. Integer finibus ligula ac aliquam lacinia. Proin ultrices libero urna, at congue justo hendrerit vel. Donec at neque nulla. Mauris efficitur dui ac augue bibendum sagittis. Nulla vulputate, metus mollis consectetur ornare, erat elit tincidunt velit, vel faucibus arcu nulla non orci. In vitae ipsum eget ipsum placerat ullamcorper. Aliquam ullamcorper viverra odio a tempor. Donec consectetur, dui venenatis sagittis maximus, ante purus scelerisque velit, et lacinia lacus nibh in nulla.\n" +
+                                "\n" +
+                                "Fusce convallis turpis vel felis ornare consequat ac id velit. Cras faucibus sed felis et molestie. Nulla risus metus, venenatis in leo ac, mattis porta lectus. Vivamus fermentum luctus velit, nec vulputate dui venenatis nec. Vestibulum varius sagittis urna, id mattis nulla consectetur consequat. Maecenas elit erat, semper et egestas in, tristique et dui. Pellentesque sapien velit, vulputate eu ex nec, blandit hendrerit quam. Praesent ac magna vel elit tincidunt accumsan nec et diam. Mauris consectetur pretium ante, nec interdum mauris mattis sit amet. Fusce malesuada ante nisl, in iaculis leo facilisis varius. Morbi purus turpis, facilisis nec arcu vitae, dignissim varius enim. Cras vestibulum quam nulla, lacinia condimentum neque vestibulum in. Mauris rhoncus interdum nisi sed sollicitudin. Curabitur imperdiet bibendum imperdiet. Proin vestibulum lectus in mi tincidunt, at venenatis risus tincidunt."
+                    )
+                )
             )
 
             _state.postValue(ViewState.Success(items))

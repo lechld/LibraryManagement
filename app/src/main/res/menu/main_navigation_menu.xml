@@ -14,8 +14,8 @@
         android:title="@string/home" />
 
     <item
-        android:id="@+id/profile_nav"
+        android:id="@+id/settings_nav"
         android:enabled="true"
-        android:icon="@drawable/person"
-        android:title="@string/profile" />
+        android:icon="@drawable/settings"
+        android:title="@string/settings" />
 </menu>
