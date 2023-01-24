@@ -16,7 +16,7 @@ class DetailViewModel(
     private val bookRepository: BookRepository,
     private val borrowedBooksRepository: BorrowedBooksRepository,
     private val userRepository: UserRepository,
-) : ViewModel() {
+) : ViewModel(), BorrowedBooksRepository.Observer {
 
     private val _state: MutableLiveData<ViewState<List<Content>>> =
         MutableLiveData(ViewState.Loading())
@@ -32,22 +32,32 @@ class DetailViewModel(
         get() = _navigateToLogin
 
     init {
+        borrowedBooksRepository.addObserver(this)
         setupContent()
+    }
+
+    override fun onCleared() {
+        borrowedBooksRepository.removeObserver(this)
+        super.onCleared()
+    }
+
+    override fun borrowedStateChanged() {
+        viewModelScope.launch {
+            _borrowed.postValue(borrowedBooksRepository.contains(bookId))
+        }
     }
 
     fun toggleBorrowed() {
         viewModelScope.launch {
-            if (userRepository.getUser() == null) {
+            /*if (userRepository.getUser() == null) {
                 _navigateToLogin.postValue(Unit)
                 return@launch
-            }
+            }*/
 
             if (borrowedBooksRepository.contains(bookId)) {
                 borrowedBooksRepository.remove(bookId)
-                _borrowed.postValue(false)
             } else {
                 borrowedBooksRepository.add(bookId)
-                _borrowed.postValue(true)
             }
         }
     }
@@ -62,19 +72,15 @@ class DetailViewModel(
             }
 
             val items = listOf(
-                Content.Headline(AndroidString.Text(book.title)),
-                Content.Headline(AndroidString.Text("By ${book.author}. Published ${book.publicationYear}.")),
-                Content.HeadlineSmall(
-                    AndroidString.Text(
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a ante mattis, consequat urna et, scelerisque metus. Nulla pretium cursus metus vel commodo. In commodo, augue in ultricies tempus, tellus nibh blandit justo, vel faucibus lectus velit nec eros. Sed vel lectus eget urna feugiat bibendum. Nulla imperdiet mauris id libero consequat facilisis. Vivamus eu accumsan leo. Mauris erat urna, feugiat eget enim a, mattis gravida ligula.\n" +
-                                "\n" +
-                                "Nam ullamcorper quam leo, vel elementum lacus ullamcorper eget. Curabitur auctor magna non lorem egestas eleifend. Suspendisse egestas sed metus et auctor. Donec scelerisque magna a nisl fringilla tempor. Duis consequat, tortor eget ornare euismod, sem est auctor nisi, a pharetra ligula sapien vitae elit. Curabitur ut pellentesque mi. Curabitur ut pretium sapien, a gravida diam. Proin laoreet libero nec eros porttitor, non volutpat felis condimentum. Pellentesque convallis ligula vel dolor gravida faucibus.\n" +
-                                "\n" +
-                                "Suspendisse potenti. Sed facilisis orci eget purus finibus rutrum. In sodales commodo elit, et tincidunt nisl. Nam scelerisque fermentum molestie. Maecenas sit amet felis nulla. Sed aliquam nisi ac mauris accumsan, eu auctor nunc congue. Quisque id iaculis ex. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam vestibulum ex et leo bibendum feugiat. Nulla sed porta ligula, in bibendum orci. Nullam id libero id sem euismod posuere eget ac lacus. Quisque interdum erat finibus viverra malesuada. Etiam iaculis, nulla in eleifend hendrerit, orci enim posuere tortor, in viverra ipsum dolor in libero. Nulla consectetur lectus sed rhoncus porta.\n" +
-                                "\n" +
-                                "Etiam nec ipsum urna. Nunc feugiat, arcu id venenatis porta, metus odio euismod tortor, sit amet consectetur mi nisl quis dui. Ut quis risus fermentum, pretium diam non, accumsan est. Nulla et sapien dapibus, vulputate leo at, pellentesque ipsum. Aenean in eleifend est. Sed tortor ipsum, commodo id commodo eu, cursus quis orci. Praesent vulputate vulputate convallis. Nam vestibulum risus at condimentum malesuada. Vestibulum a tortor sapien. Duis quis lacus eu lectus aliquam sagittis. Phasellus et pharetra erat, sit amet auctor mauris. Curabitur ullamcorper rhoncus tincidunt. Cras et lorem vehicula, laoreet nisl ut, ullamcorper orci. Vivamus quis metus id purus laoreet rhoncus finibus non tortor. Vivamus convallis euismod diam ut molestie."
-                    )
-                )
+                Content.Detail(book.id, book.coverUrl),
+                Content.HeadlineSmall(AndroidString.Text(book.title)),
+                Content.HeadlineSmall(AndroidString.Text("")),
+                Content.HeadlineSmall(AndroidString.Text("by " + book.author)),
+                Content.HeadlineSmall(AndroidString.Text("")),
+                Content.HeadlineSmall(AndroidString.Text("from: " + book.publicationYear)),
+                Content.HeadlineSmall(AndroidString.Text("")),
+                //TODO Delete "Description" once it actually works
+                Content.HeadlineSmall(AndroidString.Text("Description: " + book.description))
             )
 
             _state.postValue(ViewState.Success(items))

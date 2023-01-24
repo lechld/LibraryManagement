@@ -7,4 +7,5 @@ data class Book(
     val coverUrl: String,
     val subject: Subject,
     val publicationYear: String,
+    val description: String,
 )

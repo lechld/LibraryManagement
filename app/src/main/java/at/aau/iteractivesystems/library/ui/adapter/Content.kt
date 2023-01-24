@@ -30,7 +30,7 @@ sealed class Content {
             val id: String,
             val imageUrl: String?,
             val title: String,
-        ): Content()
+        ) : Content()
     }
 
     data class SearchResult(
@@ -39,5 +39,10 @@ sealed class Content {
         val title: String,
         val author: String,
         val publicationYear: String
+    ) : Content()
+
+    data class Detail(
+        val id: String,
+        val imageUrl: String?,
     ) : Content()
 }

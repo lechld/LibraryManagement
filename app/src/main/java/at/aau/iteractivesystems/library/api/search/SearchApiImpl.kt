@@ -11,6 +11,7 @@ import kotlinx.coroutines.withContext
 private const val ENDPOINT = OPEN_LIB_ENDPOINT + "search.json"
 private const val SEARCH_LIMIT = 100
 private const val SUBJECT_LIMIT = 12
+private const val FIELDS = "key,cover_i,edition_count,title,author_name, first_publish_year,author_key,subject"
 
 class SearchApiImpl(private val client: HttpClient) : SearchApi {
 
@@ -20,6 +21,7 @@ class SearchApiImpl(private val client: HttpClient) : SearchApi {
         client.get(ENDPOINT) {
             parameter("title", title)
             parameter("limit", SEARCH_LIMIT)
+            parameter("fields", FIELDS)
         }
     }
 
@@ -29,6 +31,7 @@ class SearchApiImpl(private val client: HttpClient) : SearchApi {
         client.get(ENDPOINT) {
             parameter("subject", subject)
             parameter("limit", SUBJECT_LIMIT)
+            parameter("fields", FIELDS)
         }
     }
 }
