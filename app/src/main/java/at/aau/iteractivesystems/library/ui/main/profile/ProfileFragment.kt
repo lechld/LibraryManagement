@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -41,11 +42,22 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setupUi(binding: FragmentProfileBinding) {
+        viewModel.isLoggedIn.observe(viewLifecycleOwner) { loggedIn ->
+            binding.loginButton.isVisible = !loggedIn
+            binding.logoutButton.isVisible = loggedIn
+        }
+
         binding.loginButton.setOnClickListener {
-            val navController = findNavController()
             val navAction = ProfileFragmentDirections.actionProfileToLogin()
 
-            navController.navigate(navAction)
+            findNavController().navigate(navAction)
+        }
+
+        binding.logoutButton.setOnClickListener {
+            viewModel.logout()
+            val navAction = ProfileFragmentDirections.actionProfileToLogin()
+
+            findNavController().navigate(navAction)
         }
     }
 }

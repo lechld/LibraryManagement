@@ -3,4 +3,5 @@
     <dimen name="smallSpacing">8dp</dimen>
     <dimen name="defaultSpacing">16sp</dimen>
     <dimen name="navigationViewHeight">56dp</dimen>
+    <dimen name="bigSpacing">48sp</dimen>
 </resources>

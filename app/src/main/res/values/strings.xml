@@ -29,4 +29,14 @@
     <string name="dialog_yes">Yes</string>
     <string name="dialog_no">No</string>
     <string name="home_header">The books you currently borrowed</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="new_user_register_now">New user? Register Now</string>
+    <string name="e_mail">E-Mail</string>
+    <string name="already_nhave_an_naccount">Already \nhave an\nAccount?</string>
+    <string name="here_s_nyour_first_nstep">Here\'s\nyour first\nstep!</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
+    <string name="register">Register</string>
+    <string name="invalid_login_data">Your input is invalid.</string>
 </resources>
