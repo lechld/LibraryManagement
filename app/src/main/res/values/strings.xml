@@ -39,4 +39,12 @@
     <string name="phone">Phone</string>
     <string name="register">Register</string>
     <string name="invalid_login_data">Your input is invalid.</string>
+    <string name="settings">Settings</string>
+    <string name="suggested_genres">Suggested Genres</string>
+    <string name="account">Account</string>
+    <string name="logged_in_info">You are logged in with your account.</string>
+    <string name="not_logged_in_info">You are not logged in at the moment. To benefit from features like syncing your data across devices, please login with your account.</string>
+    <string name="suggestion_description">Select which genres you want to get suggestion in Explore.</string>
+    <string name="openlibrary_hint">All data is provided by OpenLibrary.org - Go and check them out!</string>
+    <string name="logout">Logout</string>
 </resources>

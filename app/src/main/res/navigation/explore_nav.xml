@@ -60,7 +60,7 @@
 
         <action
             android:id="@+id/action_detail_to_profile"
-            app:destination="@+id/profile_nav"
+            app:destination="@+id/settings_nav"
             app:popUpTo="@id/explore"
             app:popUpToSaveState="true" />
 

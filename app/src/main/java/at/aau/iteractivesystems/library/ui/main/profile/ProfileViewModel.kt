@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import at.aau.iteractivesystems.library.model.Subject
+import at.aau.iteractivesystems.library.model.SuggestedGenre
 import at.aau.iteractivesystems.library.model.User
 import at.aau.iteractivesystems.library.repository.user.UserRepository
 import kotlinx.coroutines.launch
@@ -15,6 +17,12 @@ class ProfileViewModel(
     private val _isLoggedIn = MutableLiveData<Boolean>()
     val isLoggedIn: LiveData<Boolean>
         get() = _isLoggedIn
+
+    private val _suggestedGenres = MutableLiveData(
+        Subject.values().map { SuggestedGenre(it, true) }
+    )
+    val suggestedGenre: LiveData<List<SuggestedGenre>>
+        get() = _suggestedGenres
 
     init {
         viewModelScope.launch {
